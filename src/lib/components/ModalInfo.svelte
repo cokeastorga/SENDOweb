@@ -6,6 +6,7 @@
   const handleClose = () => dispatch('close');
 </script>
 
+
 {#if modalData}
   <div class="fixed inset-0 z-50 bg-gray-100 bg-opacity-50 flex items-center justify-center p-4" on:click={handleClose}>
     <div
@@ -21,21 +22,22 @@
       </button>
 
       <!-- Video -->
-      <div class="aspect-video w-full">
-        <iframe
-          title="Video informativo"
-          class="w-full h-full"
-          src={modalData.video}
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <div class="w-full h-full max-h-[360px] overflow-hidden flex items-center justify-center mt-5 bg-black">
+  <video
+    src={modalData.video}
+    class="max-h-full max-w-full object-contain"
+    
+    autoplay muted loop playsinline
+  />
+</div>
+
 
       <!-- Texto -->
       <div class="p-6 flex flex-col justify-center">
         <h2 class="text-2xl font-bold text-primary mb-4">{modalData.titulo}</h2>
-        <p class="text-gray-700 text-base">{modalData.contenido}</p>
+       <div class="text-gray-700 text-base leading-relaxed space-y-2">
+  {@html modalData.contenido}
+</div>
       </div>
     </div>
   </div>

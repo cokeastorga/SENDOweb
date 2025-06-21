@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+  import { onMount } from 'svelte';
 	
 	
 	 
@@ -13,25 +14,76 @@
     }
   };
 
+   const cerrarMenu = () => {
+    menuAbierto = false;
+  };
+
+  onMount(() => {
+  const handleClickOutside = (e: MouseEvent) => {
+    const menu = document.getElementById('menu-movil');
+    const btn = document.getElementById('btn-hamburguesa');
+    if (
+      menuAbierto &&
+      menu &&
+      !menu.contains(e.target as Node) &&
+      btn &&
+      !btn.contains(e.target as Node)
+    ) {
+      menuAbierto = false;
+    }
+  };
+
+  window.addEventListener('scroll', cerrarMenu);
+  window.addEventListener('click', handleClickOutside);
+
+  return () => {
+    window.removeEventListener('scroll', cerrarMenu);
+    window.removeEventListener('click', handleClickOutside);
+  };
+});
+
 </script>
+
+
 <!-- Navbar -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 sm:px-10 py-3 flex justify-between items-center">
-  <div class="text-xl font-bold text-primary">SENDO</div>
-  <div class="hidden sm:flex gap-6 text-sm font-medium text-gray-700">
-    <button on:click={() => scrollA('hero')} class="text-sm font-medium text-gray-700 hover:underline">Inicio</button>
-    <button on:click={() => scrollA('servicios')} class="text-sm font-medium text-gray-700 hover:underline">Servicios</button>
-    <button on:click={() => scrollA('quienes')} class="text-sm font-medium text-gray-700 hover:underline">Quiénes Somos</button>
-    <button on:click={() => scrollA('contacto')} class="text-sm font-medium text-gray-700 hover:underline">Contacto</button>
+<nav class="relative fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 sm:px-10 py-3 flex justify-between items-center transition duration-300">
+
+  <!-- Logos -->
+  <a href="#hero" class="flex items-center justify-center">
+    <img src="/logo2.png" alt="Logo Escritorio" class="hidden sm:block h-16 w-auto" />
+    <img src="/logo3.jpg" alt="Logo Móvil" class="block sm:hidden h-14 w-auto" />
+  </a>
+
+  <!-- Menú escritorio -->
+  <div class="hidden sm:flex gap-6 text-sm font-medium text-green-700">
+    <button on:click={() => scrollA('hero')} class="text-xl font-medium text-green-600 hover:underline">Inicio</button>
+    <button on:click={() => scrollA('servicios')} class="text-xl font-medium text-green-600 hover:underline">Servicios</button>
+    <button on:click={() => scrollA('quienes')} class="text-xl font-medium text-green-600 hover:underline">Quiénes Somos</button>
+    <button on:click={() => scrollA('contacto')} class="text-xl font-medium text-green-600 hover:underline">Contacto</button>
   </div>
-  <!-- Móvil -->
-  <button class="sm:hidden" on:click={() => (menuAbierto = !menuAbierto)}>
-    ☰
+
+  <!-- Botón hamburguesa móvil -->
+  <button id="btn-hamburguesa" class="sm:hidden text-3xl text-green-700" on:click={() => (menuAbierto = !menuAbierto)}>
+    {menuAbierto ? '✖' : '☰'}
   </button>
 </nav>
 
+<!-- Menú móvil desplegable -->
+{#if menuAbierto}
+  <div
+    id="menu-movil"
+    class="absolute top-full left-0 w-full sm:hidden bg-white shadow-md px-4 py-4 flex flex-col gap-4 text-green-700 text-base font-medium z-40"
+  >
+    <button on:click={() => scrollA('hero')}>Inicio</button>
+    <button on:click={() => scrollA('servicios')}>Servicios</button>
+    <button on:click={() => scrollA('quienes')}>Quiénes Somos</button>
+    <button on:click={() => scrollA('contacto')}>Contacto</button>
+  </div>
+{/if}
+
 <!-- Botón flotante WhatsApp -->
 <a
-  href="https://wa.me/56912345678"
+  href="https://wa.me/56998451117"
   target="_blank"
   aria-label="Enviar mensaje por WhatsApp"
   class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300 flex items-center justify-center"
