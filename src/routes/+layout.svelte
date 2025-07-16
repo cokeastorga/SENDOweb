@@ -50,7 +50,7 @@
 
   <!-- Logos -->
   <a href="#hero" class="flex items-center justify-center">
-    <img src="/logo2.png" alt="Logo Escritorio" class="hidden sm:block h-16 w-auto" />
+    <img src="/logo4.png" alt="Logo Escritorio" class="hidden sm:block h-26 w-auto" />
     <img src="/logo3.jpg" alt="Logo Móvil" class="block sm:hidden h-14 w-auto" />
   </a>
 

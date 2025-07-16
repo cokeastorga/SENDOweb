@@ -11,14 +11,24 @@
 
   const enviarCorreo = async (e: Event) => {
     e.preventDefault();
-    try {
-      const result = await emailjs.send(
-        'service_jqj5141',
-        'template_azju3l8',
-        { nombre, email, mensaje },
-        'BCB_XP5C0iEhCvGJ7'
-      );
-      enviado = true;
+     try {
+    // 1. Correo al admin
+    await emailjs.send(
+      'service_jqj5141',        // TU service ID
+      'template_rp7gvfi',         // Plantilla para ADMIN
+      { nombre, email, mensaje },
+      'BCB_XP5C0iEhCvGJ7'
+    );
+
+    // 2. Correo al usuario
+    await emailjs.send(
+      'service_jqj5141',        // TU service ID
+      'template_azju3l8',       // Plantilla para USUARIO
+      { nombre, email, mensaje },
+      'BCB_XP5C0iEhCvGJ7'
+    );
+
+    enviado = true;
       nombre = email = mensaje = '';
     } catch (error) {
       console.error('Error al enviar', error);
@@ -30,45 +40,51 @@
   {
     icon: '👩‍⚕️',
     title: 'Cuidadoras a Domicilio',
-    desc: 'Control de salud en general, administración de medicamentos, compañia y cuidado integral las 24 horas.',
+    desc: 'Atención de salud en general, administración de medicamentos, compañia y cuidado integral las 24 horas.',
     video: '/temp.mp4',
     contenido:
     `
-  <p>Nuestro servicio de enfermería a domicilio entrega atención profesional en el entorno del paciente. Incluye:</p>
-  <ul class="list-disc pl-5 space-y-1 mt-2">
-    <li>Administración de medicamentos por vía oral, subcutánea o intramuscular.</li>
-    <li>Control de signos vitales: presión arterial, saturación, frecuencia respiratoria y temperatura.</li>
-    <li>Apoyo clínico general y primeros auxilios.</li>
-  </ul>
-  <p class="mt-4">Ideal para pacientes postoperatorios, crónicos o en seguimiento médico.</p>
+<p>Nuestro servicio de enfermería a domicilio entrega atención profesional en el hogar del paciente. Incluye:</p>
+<ul class="list-disc pl-5 space-y-1 mt-2">
+  <li>Administración de medicamentos por vía oral, tópica, inhalatoria, enteral, parenteral, intradérmica, subcutánea e intramuscular.</li>
+  <li>Control de signos vitales: presión arterial, saturación de oxígeno, frecuencia cardíaca, frecuencia respiratoria y temperatura corporal.</li>
+  <li>Oxigenoterapia.</li>
+  <li>Nebulización.</li>
+  <li>Aspiración de secreciones.</li>
+  <li>Prevención de úlceras decúbito.</li>
+  <li>Apoyo clínico general y primeros auxilios.</li>
+</ul>
+<p class="mt-4">Ideal para pacientes postoperados, personas con enfermedades crónicas, adultos mayores y quienes requieran seguimiento médico.</p>
+
 `
 },
-  {
-    icon: '💉',
-    title: 'Curaciones',
-    desc: 'Tratamiento de heridas postoperatorias, escaras, úlceras y lesiones complejas.',
-    video: '/curaciones.mp4',
-    contenido:`
-  <p>Realizamos curaciones avanzadas directamente en el domicilio, lo que permite mayor comodidad y seguridad para el paciente. Nuestros servicios incluyen:</p>
-  <ul class="list-disc pl-5 space-y-1 mt-2">
-    <li>Tratamiento de heridas quirúrgicas, úlceras por presión, escaras y quemaduras leves.</li>
-    <li>Técnicas estériles y uso de apósitos especiales.</li>
-    <li>Prevención de infecciones y monitoreo de evolución.</li>
-  </ul>
-  <p class="mt-4">Atención realizada por técnicos o enfermeros certificados, con seguimiento personalizado.</p>
-`
-},
+ // {
+   // icon: '💉',
+    //title: 'Curaciones',
+    //desc: 'Tratamiento de heridas postoperatorias, escaras, úlceras y lesiones complejas.',
+    //video: '/curaciones.mp4',
+    //contenido:`
+  //<p>Realizamos curaciones avanzadas directamente en el domicilio, lo que permite mayor comodidad y seguridad para el paciente. Nuestros servicios incluyen:</p>
+  //<ul class="list-disc pl-5 space-y-1 mt-2">
+   // <li>Tratamiento de heridas quirúrgicas, úlceras por presión, escaras y quemaduras leves.</li>
+    //<li>Técnicas estériles y uso de apósitos especiales.</li>
+    //<li>Prevención de infecciones y monitoreo de evolución.</li>
+  //</ul>
+  //<p class="mt-4">Atención realizada por técnicos o enfermeros certificados, con seguimiento personalizado.</p>
+//`
+//}
+
   {
   icon: '🧪',
-  title: 'Manejo de Sondas y Dispositivos',
-  desc: 'Atención especializada para el control e higiene de sondas y equipos médicos.',
+  title: 'Instalación de:',
+  desc: 'Sondas urinarias, Sondas nasogastricas, Tratamientos endovenosos',
   video: '/suero.mp4',
   contenido:  `
-  <p>Atendemos a pacientes que requieren dispositivos médicos en su día a día, con profesionales capacitados en su manejo. Incluye:</p>
+  <p>Atendemos a pacientes que requieren el uso diario de dispositivos médicos, brindando atención con personal capacitado en su manejo. Nuestro servicio incluye:</p>
   <ul class="list-disc pl-5 space-y-1 mt-2">
     <li>Manejo de sondas urinarias, nasogástricas y gástricas (PEG).</li>
-    <li>Cuidados de colostomías y traqueostomías.</li>
-    <li>Higiene, control de obstrucciones y prevención de infecciones.</li>
+    <li>Colostomías y Traqueostomías.</li>
+   
   </ul>
   <p class="mt-4">Un servicio esencial para garantizar el confort, la seguridad y el correcto funcionamiento de los equipos.</p>
 `
@@ -90,18 +106,18 @@ function abrirModal(servicio) {
       contenido:
        `
   <p>El hogar no solo brinda comodidad, también promueve bienestar emocional, reduce el riesgo de hospitalizaciones y mejora el estado anímico del paciente.</p>
-  <p class="mt-3">Las cuidadoras planifican actividades y brindan apoyo físico y emocional en un entorno familiar.</p>
+  <p class="mt-3">SENDO planifica actividades que ejecutan nuestras cuidadoras para brindar apoyo físico y emocional de nuestros pacientes en su entorno familiar.</p>
 `,
     },
-    {
-      titulo: '¿Cuándo buscar un cuidador?',
-      video: '/medidorpresion.mp4',
-      contenido:
-       `
-  <p>El envejecimiento trae síntomas comunes como dolores, pérdida de visión, enfermedades crónicas o demencia.</p>
-  <p class="mt-3">Cuando actividades básicas se ven afectadas, es momento de contratar apoyo profesional para preservar la salud y evitar el desgaste familiar.</p>
-`,
-    },
+   {
+  titulo: '¿Cuándo buscar un cuidador?',
+  video: '/medidorpresion.mp4',
+  contenido: `
+    <p>El envejecimiento puede traer dificultades para bañarse, vestirse, alimentarse, movilizarse o recordar tareas cotidianas. Estas situaciones, junto con enfermedades crónicas o demencia, afectan la autonomía y la calidad de vida.</p>
+    <p class="mt-3">Cuando las actividades básicas del día a día se ven comprometidas, es momento de considerar apoyo profesional para cuidar la salud del adulto mayor y evitar el desgaste físico y emocional de la familia.</p>
+  `,
+},
+
     {
       titulo: 'La soledad como factor de riesgo',
       video: '/soledad.mp4',
@@ -144,8 +160,11 @@ function abrirModal(servicio) {
     <h1 class="text-4xl md:text-6xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-lg">
       Bienvenidos a <span class="text-green-400">SENDO</span>
     </h1>
-    <p class="text-lg md:text-2xl md:text-3xl mb-10 drop-shadow">
-      Servicio de Enfermería Domiciliaria.
+    <p class="text-lg md:text-2xl md:text-3xl mb-2 drop-shadow">
+      Servicio de Enfermería Domiciliaria
+    </p>
+     <p class="text-lg md:text-2xl md:text-3xl mb-10 drop-shadow">
+      Desde 2007
     </p>
     <a href="#servicios"
       class="inline-flex items-center gap-3 px-8 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition text-lg font-semibold">
@@ -167,7 +186,7 @@ function abrirModal(servicio) {
   <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
     {#each [
     'Atención disponible 24/7 en todas las comunas de Santiago',
-    'Personal certificado y evaluados rigurosamente',
+    'Personal calificado y evaluado rigurosamente',
     'Servicio cálido, humanizado y flexible',
     'Cuidadoras a domicilio según necesidad'
     ] as beneficio, index}
@@ -185,9 +204,8 @@ function abrirModal(servicio) {
   <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
     <h2 class="text-3xl md:text-5xl font-bold text-green-600 mb-6">Quiénes Somos</h2>
     <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-      En <span class="font-semibold text-green-600">SENDO</span> somos un equipo multidisciplinario comprometido con
-      entregar atención al paciente de forma personalizada, segura y profesional directamente en su hogar.
-      Nuestro enfoque humano y técnico busca siempre mejorar la calidad de vida de quienes más lo necesitan.
+      En <span class="font-semibold text-green-600">SENDO</span> contamos con más de 18 años de experiencia entregando atención personalizada, segura y especializada en el hogar.
+       Nuestro equipo combina compromiso humano y excelencia técnica para mejorar la calidad de vida de cada paciente, con un enfoque centrado en quienes más lo necesitan.
     </p>
   </div>
 </section>
@@ -208,7 +226,7 @@ function abrirModal(servicio) {
     <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" data-aos="fade-up">
       Nuestros Servicios
     </h2>
-    <div class="grid md:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
    {#each servicios as servicio, index}
   <div
     class="bg-white/90 text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 border border-gray-100 backdrop-blur-md cursor-pointer"
@@ -294,7 +312,7 @@ function abrirModal(servicio) {
       <p class="text-gray-600 mb-8 text-base md:text-lg">¿Tienes dudas o deseas agendar una visita? Escríbenos por
         WhatsApp, correo electrónico o completa el formulario.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
-        <a href="https://wa.me/56912345678" target="_blank"
+        <a href="https://wa.me/56998451117" target="_blank"
           class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 flex items-center gap-2 transition">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path
@@ -302,7 +320,7 @@ function abrirModal(servicio) {
           </svg>
           WhatsApp
         </a>
-        <a href="mailto:contacto@sendo.cl"
+        <a href="mailto:canny.cabalin@enfermeriasendo.cl"
           class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 flex items-center gap-2 transition">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 12H8m8 0l-4 4m4-4l-4-4" />
@@ -363,7 +381,7 @@ function abrirModal(servicio) {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <a href="https://maps.app.goo.gl/TU_DIRECCION_AQUI" target="_blank"
+            <a href="https://maps.app.goo.gl/" target="_blank"
               class="hover:text-green-400 transition text-md">Santiago, Chile</a>
           </li>
           <li class="flex items-center justify-center md:justify-start gap-2">
@@ -372,7 +390,7 @@ function abrirModal(servicio) {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <a href="mailto:contacto@enfermeriasendo.cl" class="hover:text-green-400 transition text-md">contacto@enfermeriasendo.cl</a>
+            <a href="mailto:canny.cabalin@enfermeriasendo.cl" class="hover:text-green-400 transition text-md">canny.cabalin@enfermeriasendo.cl</a>
           </li>
           <li class="flex items-center justify-center md:justify-start gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -380,7 +398,7 @@ function abrirModal(servicio) {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
-            <a href="tel:+56912345678" class="hover:text-green-400 transition text-md">+56 9 9 845 1117</a>
+            <a href="tel:+56998451117" class="hover:text-green-400 transition text-md">+56 9 9 845 1117</a>
           </li>
           <li class="flex items-center justify-center md:justify-start gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
