@@ -1,52 +1,80 @@
 <script lang="ts">
-  import ModalInfo from '$lib/components/ModalInfo.svelte';
-  import emailjs from 'emailjs-com';
   import { onMount } from 'svelte';
-  import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
-  import { db } from '$lib/firebase'; // Importa la instancia de Firestore
+  import { browser } from '$app/environment';
 
-  // Form for contact
+  // Firestore
+  import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
+  import { db } from '$lib/firebase';
+
+  // EmailJS (carga en cliente para evitar SSR issues)
+  let emailjs: any = null;
+  if (browser) {
+    import('emailjs-com').then((m) => (emailjs = m.default ?? m));
+  }
+
+  // Form contacto
   let nombre = '';
   let email = '';
   let mensaje = '';
   let enviado = false;
-  let modalData = null;
 
-  // Form for testimonials
+  // Modal
+  type ModalData = { titulo: string; video?: string; contenido: string } | null;
+  let modalData: ModalData = null;
+
+  // Form testimonios
   let testimonioNombre = '';
   let testimonioComentario = '';
-  let testimonioRating = 5; // Default rating
+  let testimonioRating: number = 5;
   let testimonioEnviado = false;
 
   // Lista de testimonios desde Firestore
-  let testimonios = [];
+  let testimonios: Array<any> = [];
 
-  // Cargar testimonios desde Firestore al montar el componente
+  // Bloquear scroll del body cuando la modal está abierta
+  $: if (browser) {
+    document.body.style.overflow = modalData ? 'hidden' : '';
+  }
+
+  // ESC para cerrar
+  function onKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape' && modalData) cerrarModal();
+  }
+
   onMount(() => {
+    if (browser) window.addEventListener('keydown', onKeydown);
+
     const q = query(collection(db, 'testimonios'), orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      testimonios = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      testimonios = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     });
-    return () => unsubscribe(); // Limpiar la suscripción al desmontar
+
+    return () => {
+      if (browser) window.removeEventListener('keydown', onKeydown);
+      unsubscribe();
+    };
   });
+
+  function abrirModal(item: { title?: string; titulo?: string; video?: string; contenido: string }) {
+    modalData = {
+      titulo: item.title ?? item.titulo ?? 'Detalle',
+      video: item.video,
+      contenido: item.contenido
+    };
+  }
+  function cerrarModal() {
+    modalData = null;
+  }
 
   const enviarCorreo = async (e: Event) => {
     e.preventDefault();
     try {
-      await emailjs.send(
-        'service_jqj5141',
-        'template_rp7gvfi',
-        { nombre, email, mensaje },
-        'BCB_XP5C0iEhCvGJ7'
-      );
-      await emailjs.send(
-        'service_jqj5141',
-        'template_azju3l8',
-        { nombre, email, mensaje },
-        'BCB_XP5C0iEhCvGJ7'
-      );
+      if (!browser || !emailjs) throw new Error('EmailJS no disponible');
+      await emailjs.send('service_jqj5141', 'template_rp7gvfi', { nombre, email, mensaje }, 'BCB_XP5C0iEhCvGJ7');
+      await emailjs.send('service_jqj5141', 'template_azju3l8', { nombre, email, mensaje }, 'BCB_XP5C0iEhCvGJ7');
       enviado = true;
       nombre = email = mensaje = '';
+      setTimeout(() => (enviado = false), 3500);
     } catch (error) {
       console.error('Error al enviar', error);
       alert('Error al enviar el mensaje.');
@@ -58,10 +86,10 @@
     if (testimonioNombre && testimonioComentario) {
       try {
         await addDoc(collection(db, 'testimonios'), {
-          quote: testimonioComentario,
-          author: testimonioNombre,
-          rating: testimonioRating,
-          createdAt: new Date(),
+          quote: testimonioComentario.trim(),
+          author: testimonioNombre.trim(),
+          rating: Number(testimonioRating) || 5,
+          createdAt: serverTimestamp(),
           approved: false // Para moderación
         });
         testimonioEnviado = true;
@@ -119,7 +147,7 @@
       contenido: `
         <p>El hogar no solo brinda comodidad, también promueve bienestar emocional, reduce el riesgo de hospitalizaciones y mejora el estado anímico del paciente.</p>
         <p class="mt-3">SENDO planifica actividades que ejecutan nuestras cuidadoras para brindar apoyo físico y emocional en el entorno familiar.</p>
-      `,
+      `
     },
     {
       titulo: '¿Cuándo buscar un cuidador?',
@@ -127,7 +155,7 @@
       contenido: `
         <p>El envejecimiento puede dificultar actividades como bañarse, vestirse, alimentarse, movilizarse o recordar tareas cotidianas. Estas situaciones, junto con enfermedades crónicas o demencia, afectan la autonomía y la calidad de vida.</p>
         <p class="mt-3">Cuando las actividades diarias se ven comprometidas, es momento de considerar apoyo profesional para cuidar la salud del adulto mayor y evitar el desgaste de la familia.</p>
-      `,
+      `
     },
     {
       titulo: 'La soledad como factor de riesgo',
@@ -135,27 +163,15 @@
       contenido: `
         <p>La soledad en adultos mayores incrementa el riesgo de depresión, ansiedad, deterioro cognitivo y enfermedades físicas.</p>
         <p class="mt-3">Un cuidador no solo asiste físicamente, también aporta compañía y contención emocional, mitigando estos riesgos.</p>
-      `,
-    },
+      `
+    }
   ];
-
-  function abrirModal(servicio) {
-    modalData = {
-      titulo: servicio.title,
-      video: servicio.video,
-      contenido: servicio.contenido
-    };
-  }
-
-  onMount(() => {
-    import('aos').then((AOS) => AOS.init({ once: true }));
-  });
 </script>
 
 <svelte:head>
   <title>SENDO - Enfermería y Cuidadoras a Domicilio en Santiago</title>
-  <meta name="description" content="Servicios profesionales de enfermería y cuidadoras a domicilio en Santiago, Chile. Atención 24/7 para adultos mayores, pacientes postoperatorios y más. Contáctanos hoy.">
-  <meta name="keywords" content="enfermería a domicilio, cuidadoras a domicilio, atención médica en casa, Santiago, adultos mayores, postoperatorio, sondas urinarias, tratamientos endovenosos, SENDO">
+  <meta name="description" content="Servicios profesionales de enfermeria y cuidadoras a domicilio en Santiago, Chile. Atención 24/7 para adultos mayores, pacientes postoperatorios y más. Contáctanos hoy.">
+  <meta name="keywords" content="enfermeria a domicilio, cuidadoras a domicilio, atencion medica en casa, Santiago, adultos mayores, postoperatorio, sondas urinarias, tratamientos endovenosos, enfermeras santiago, cuidadoras santiago SENDO">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
@@ -165,54 +181,16 @@
   <meta name="geo.position" content="-33.4489;-70.6693">
   <meta name="ICBM" content="-33.4489, -70.6693">
   <link rel="canonical" href="https://www.enfermeriasendo.cl" />
-  <meta property="og:title" content="SENDO - Enfermería y Cuidadoras a Domicilio en Santiago">
+  <meta property="og:title" content="SENDO - Enfermeria y Cuidadoras a Domicilio en Santiago">
   <meta property="og:description" content="Atención profesional 24/7 en el hogar: cuidadoras, sondas, tratamientos endovenosos y más en Santiago, Chile.">
   <meta property="og:image" content="https://www.enfermeriasendo.cl/og-image.jpg">
   <meta property="og:url" content="https://www.enfermeriasendo.cl">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CL">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SENDO - Enfermería a Domicilio en Santiago">
-  <meta name="twitter:description" content="Cuidadoras y enfermería profesional 24/7 en Santiago, Chile. Contacto por WhatsApp o correo.">
+  <meta name="twitter:title" content="SENDO - Enfermeria a Domicilio en Santiago">
+  <meta name="twitter:description" content="Cuidadoras y enfermeria para el adulto mayor 24/7 en Santiago, Chile. Contacto por WhatsApp o correo.">
   <meta name="twitter:image" content="https://www.enfermeriasendo.cl/og-image.jpg">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "SENDO - Enfermería Domiciliaria",
-      "description": "Servicios profesionales de enfermería y cuidadoras a domicilio en Santiago, Chile. Atención 24/7 para adultos mayores, pacientes postoperatorios y más.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressRegion": "Región Metropolitana",
-        "addressCountry": "CL"
-      },
-      "telephone": "+56998451117",
-      "email": "canny.cabalin@enfermeriasendo.cl",
-      "url": "https://www.enfermeriasendo.cl",
-      "openingHours": "Mo-Su 00:00-23:59",
-      "image": "https://www.enfermeriasendo.cl/og-image.jpg",
-      "sameAs": ["https://wa.me/56998451117"],
-      "offers": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Cuidadoras a Domicilio"
-          },
-          "description": "Atención de salud integral, administración de medicamentos, compañía y cuidado 24/7."
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Instalación de Dispositivos Médicos"
-          },
-          "description": "Sondas urinarias, nasogástricas y tratamientos endovenosos con personal capacitado."
-        }
-      ]
-    }
-  </script>
   <link rel="preload" href="/abuela_computador.mp4" as="video" type="video/mp4">
   <link rel="preload" href="/logo3.jpg" as="image">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
@@ -299,9 +277,6 @@
         </div>
       {/each}
     </div>
-    {#if modalData}
-      <ModalInfo modalData={modalData} on:close={() => (modalData = null)} />
-    {/if}
   </div>
 </section>
 
@@ -312,8 +287,8 @@
       <div
         role="button"
         tabindex="0"
-        on:click={() => (modalData = articulo)}
-        on:keydown={(e) => e.key === 'Enter' && (modalData = articulo)}
+        on:click={() => abrirModal(articulo)}
+        on:keydown={(e) => e.key === 'Enter' && abrirModal(articulo)}
         class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-lg transition-all border border-gray-200"
         data-aos="fade-up"
         data-aos-delay="100"
@@ -336,19 +311,14 @@
     <h2 id="testimonios-title" class="text-3xl md:text-5xl font-bold text-center mb-12 text-green-400" data-aos="fade-up">Testimonios</h2>
     <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
       {#each testimonios as testimonio, index}
-        {#if testimonio.approved} <!-- Mostrar solo testimonios aprobados -->
+        {#if testimonio.approved}
           <blockquote class="bg-white/90 text-gray-800 p-6 rounded-xl shadow border-l-4 border-green-400 backdrop-blur-md" data-aos="fade-up" data-aos-delay="{index * 100}">
             <p class="italic mb-2 text-md">“{testimonio.quote}”</p>
             <div class="flex items-center gap-2 mb-2">
-              {#each Array(testimonio.rating) as _, i}
+              {#each Array(Number(testimonio.rating) || 0) as _, i}
                 <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
- <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 
-0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.286 
-3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 
-00-1.176 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.286-
-3.97a1 1 0 00-.364-1.118L2.46 
-8.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 
-00.95-.69l1.286-3.97z" />                </svg>
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.97a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.286 3.97c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.176 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.286-3.97a1 1 0 00-.364-1.118L2.46 8.397c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.97z" />
+                </svg>
               {/each}
             </div>
             <footer class="text-xs text-green-800">– {testimonio.author}</footer>
@@ -356,6 +326,7 @@
         {/if}
       {/each}
     </div>
+
     <!-- Formulario para nuevos testimonios -->
     <div class="max-w-xl mx-auto mt-12 bg-white/90 p-6 rounded-xl shadow-lg border border-gray-100 backdrop-blur-md" data-aos="fade-up" data-aos-delay="200" aria-labelledby="nuevo-testimonio-title">
       <h3 id="nuevo-testimonio-title" class="text-xl font-semibold text-gray-800 mb-4">Comparte tu experiencia</h3>
@@ -385,13 +356,14 @@
             bind:value={testimonioRating}
             id="rating"
             class="w-full px-4 py-3 border text-gray-800 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
+            on:change={(e) => (testimonioRating = Number((e.target as HTMLSelectElement).value))}
             aria-label="Calificación del servicio"
           >
-            <option value="5">5 Estrellas</option>
-            <option value="4">4 Estrellas</option>
-            <option value="3">3 Estrellas</option>
-            <option value="2">2 Estrellas</option>
-            <option value="1">1 Estrella</option>
+            <option value={5}>5 Estrellas</option>
+            <option value={4}>4 Estrellas</option>
+            <option value={3}>3 Estrellas</option>
+            <option value={2}>2 Estrellas</option>
+            <option value={1}>1 Estrella</option>
           </select>
         </div>
         <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium">Enviar Testimonio</button>
@@ -411,7 +383,7 @@
         </svg>
         WhatsApp
       </a>
-      <a href="mailto:canny.cabalin@enfermeriasendo.cl" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 flex items-center gap-2 transition" aria-label="Enviar correo electrónico">
+      <a href="mailto:sendo.eirl@gmail.com" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 flex items-center gap-2 transition" aria-label="Enviar correo electrónico">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M16 12H8m8 0l-4 4m4-4l-4-4" />
         </svg>
@@ -460,7 +432,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 text-green-400" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <a href="mailto:canny.cabalin@enfermeriasendo.cl" class="hover:text-green-400 transition text-md">canny.cabalin@enfermeriasendo.cl</a>
+          <a href="mailto:sendo.eirl@gmail.com" class="hover:text-green-400 transition text-md">sendo.eirl@gmail.com</a>
         </li>
         <li class="flex items-center justify-center md:justify-start gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 text-green-400" aria-hidden="true">
@@ -478,32 +450,99 @@
       <div class="mt-6 flex justify-center md:justify-start gap-4">
         <a href="https://facebook.com/tupagina" target="_blank" class="text-gray-400 hover:text-green-400 transition" aria-label="Facebook de SENDO">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.297c0-.968.784-1.703 1.75-1.703h2.25v-4h-2.25c-2.206 0-4 1.794-4 4v1h-3v4h3v12h5v-12h4.642l.358-4h-4v-1.297c0-.968.784-1.703 1.75-1.703h2.25v-4h-2.25c-2.206 0-4 1.794-4 4v1h-3v4z" />
+            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.297c0-.968.784-1.703 1.75-1.703h2.25v-4h-2.25c-2.206 0-4 1.794-4 4v1h-3v4z" />
           </svg>
         </a>
         <a href="https://instagram.com/tuperfil" target="_blank" class="text-gray-400 hover:text-green-400 transition" aria-label="Instagram de SENDO">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
-            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.239 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.239-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.239-2.242-1.301-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.239 3.608-1.301 1.265-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.629.073-3.027.468-4.119 1.56C2.468 3.027 2.073 4.425 2 6.054c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.073 1.629.468 3.027 1.56 4.119 1.092 1.092 2.49 1.487 4.119 1.56 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.629-.073 3.027-.468 4.119-1.56 1.092-1.092 1.487-2.49 1.56-4.119.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.073-1.629-.468-3.027-1.56-4.119-1.092-1.092-2.49-1.487-4.119-1.56-1.28-.058-1.688-.072-4.947-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.162 12 18.162s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.324c-2.299 0-4.162-1.863-4.162-4.162S9.701 7.838 12 7.838s4.162 1.863 4.162 4.162S14.299 16.162 12 16.162zm4.406-10.406c0 .796-.645 1.441-1.441 1.441s-1.441-.645-1.441-1.441.645-1.441 1.441-1.441 1.441.645 1.441 1.441z" />
+            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.239 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.239-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.239-2.242-1.301-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.239 3.608-1.301 1.265-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.629.073-3.027.468-4.119 1.56C2.468 3.027 2.073 4.425 2 6.054c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.73 1.629.468 3.027 1.56 4.119 1.092 1.092 2.49 1.487 4.119 1.56 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.629-.073 3.027-.468 4.119-1.56 1.092-1.092 1.487-2.49 1.56-4.119.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.073-1.629-.468-3.027-1.56-4.119-1.092-1.092-2.49-1.487-4.119-1.56-1.28-.058-1.688-.072-4.947-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.162 12 18.162s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.324c-2.299 0-4.162-1.863-4.162-4.162S9.701 7.838 12 7.838s4.162 1.863 4.162 4.162S14.299 16.162 12 16.162zm4.406-10.406c0 .796-.645 1.441-1.441 1.441s-1.441-.645-1.441-1.441.645-1.441 1.441-1.441 1.441.645 1.441 1.441z" />
           </svg>
         </a>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+  		<div class="text-center text-sm text-white-500 mt-10 border-t border-green-700 pt-4">
+  &copy; {new Date().getFullYear()} 
+  <a 
+    href="https://ccsolution.cl" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="hover:underline hover:text-green-300"
+  >
+    CC IT&Solutions
+  </a>. 
+  Todos los derechos reservados.
+</div>
+</footer>
+
+<!-- MODAL OVERLAY -->
+{#if modalData}
+  <div
+    class="fixed inset-0 z-[1000] flex items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-label={modalData.titulo}
+    on:click={cerrarModal}
+  >
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+    <!-- Panel -->
+    <div
+      class="relative z-[1001] w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-gray-200 overflow-hidden animate-fade-in"
+      on:click|stopPropagation
+    >
+      <button
+        class="absolute top-3 right-3 inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/80 px-2.5 py-2 text-gray-700 hover:bg-white focus:outline-none shadow"
+        on:click={cerrarModal}
+        aria-label="Cerrar modal"
+      >
+        ✕
+      </button>
+
+      <header class="px-5 pt-5 pb-3">
+        <h3 class="text-xl font-semibold text-gray-900">{modalData.titulo}</h3>
+      </header>
+
+      {#if modalData.video}
+        <div class="w-full aspect-video bg-black">
+          <video src={modalData.video} controls playsinline class="w-full h-full object-cover" />
+        </div>
+      {/if}
+
+      <div class="p-5 prose max-w-none">
+        {@html modalData.contenido}
+      </div>
+
+      <div class="px-5 pb-5">
+        <button
+          class="w-full rounded-lg bg-green-600 text-white py-2.5 hover:bg-green-700 transition"
+          on:click={cerrarModal}
+        >
+          Cerrar
+        </button>
       </div>
     </div>
   </div>
-</footer>
+{/if}
 
 <style>
   :global(body) {
     font-family: 'Poppins', sans-serif;
   }
   .animate-fade-in {
-    animation: fadeIn 1s ease forwards;
+    animation: fadeIn 180ms ease-out forwards;
     opacity: 0;
+    transform: translateY(4px);
   }
-  .delay-100 { animation-delay: 0.1s; }
-  .delay-200 { animation-delay: 0.2s; }
-  .delay-300 { animation-delay: 0.3s; }
-  .delay-400 { animation-delay: 0.4s; }
   @keyframes fadeIn {
-    to { opacity: 1; }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  :global([data-aos]) {
+    opacity: 1 !important;
+    transform: none !important;
   }
 </style>
