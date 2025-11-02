@@ -61,6 +61,11 @@
       video: item.video,
       contenido: item.contenido
     };
+    // Llevar el foco a la ventana para accesibilidad
+    setTimeout(() => {
+      const el = document.getElementById('modal-panel');
+      el?.focus();
+    }, 0);
   }
   function cerrarModal() {
     modalData = null;
@@ -191,16 +196,22 @@
   <meta name="twitter:title" content="SENDO - Enfermeria a Domicilio en Santiago">
   <meta name="twitter:description" content="Cuidadoras y enfermeria para el adulto mayor 24/7 en Santiago, Chile. Contacto por WhatsApp o correo.">
   <meta name="twitter:image" content="https://www.enfermeriasendo.cl/og-image.jpg">
+
+  <!-- Preloads -->
   <link rel="preload" href="/abuela_computador.mp4" as="video" type="video/mp4">
   <link rel="preload" href="/logo3.jpg" as="image">
+
+  <!-- AOS CSS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </svelte:head>
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 py-16 overflow-hidden">
-  <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true">
+  <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="metadata">
     <source src="/abuela_computador.mp4" type="video/mp4" />
     Tu navegador no soporta el elemento de video.
   </video>
@@ -252,7 +263,7 @@
 </section>
 
 <section id="servicios" class="relative py-20 px-4 overflow-hidden" aria-labelledby="servicios-title">
-  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true">
+  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="metadata">
     <source src="/tomandoprecion.mp4" type="video/mp4" />
     Tu navegador no soporta videos HTML5.
   </video>
@@ -302,7 +313,7 @@
 </section>
 
 <section class="relative py-20 px-4 overflow-hidden" aria-labelledby="testimonios-title">
-  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true">
+  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="metadata">
     <source src="/testimonio.mp4" type="video/mp4" />
     Tu navegador no soporta videos HTML5.
   </video>
@@ -455,61 +466,73 @@
         </a>
         <a href="https://instagram.com/tuperfil" target="_blank" class="text-gray-400 hover:text-green-400 transition" aria-label="Instagram de SENDO">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
-            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.239 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.239-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.239-2.242-1.301-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.239 3.608-1.301 1.265-.058 1.645-.07 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.629.073-3.027.468-4.119 1.56C2.468 3.027 2.073 4.425 2 6.054c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.73 1.629.468 3.027 1.56 4.119 1.092 1.092 2.49 1.487 4.119 1.56 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.629-.073 3.027-.468 4.119-1.56 1.092-1.092 1.487-2.49 1.56-4.119.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.073-1.629-.468-3.027-1.56-4.119-1.092-1.092-2.49-1.487-4.119-1.56-1.28-.058-1.688-.072-4.947-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.162 12 18.162s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.324c-2.299 0-4.162-1.863-4.162-4.162S9.701 7.838 12 7.838s4.162 1.863 4.162 4.162S14.299 16.162 12 16.162zm4.406-10.406c0 .796-.645 1.441-1.441 1.441s-1.441-.645-1.441-1.441.645-1.441 1.441-1.441 1.441.645 1.441 1.441z" />
+            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.239 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.239-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.239-2.242-1.301-3.608-.058-1.28-.072-1.688-.072-4.947s.014-3.667.072-4.947c.073-1.629.468-3.027 1.56-4.119 1.092-1.092 2.49-1.487 4.119-1.56 1.28-.058 1.688-.072 4.947-.072s3.667-.014 4.947-.072c1.629-.073 3.027-.468 4.119-1.56 1.092-1.092 1.487-2.49 1.56-4.119.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.073-1.629-.468-3.027-1.56-4.119-1.092-1.092-2.49-1.487-4.119-1.56-1.28-.058-1.688-.072-4.947-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.162 12 18.162s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.324c-2.299 0-4.162-1.863-4.162-4.162S9.701 7.838 12 7.838s4.162 1.863 4.162 4.162S14.299 16.162 12 16.162zm4.406-10.406c0 .796-.645 1.441-1.441 1.441s-1.441-.645-1.441-1.441.645-1.441 1.441-1.441 1.441.645 1.441 1.441z" />
           </svg>
         </a>
-        
       </div>
-      
     </div>
-    
   </div>
-  		<div class="text-center text-sm text-white-500 mt-10 border-t border-green-700 pt-4">
-  &copy; {new Date().getFullYear()} 
-  <a 
-    href="https://ccsolution.cl" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    class="hover:underline hover:text-green-300"
-  >
-    CC IT&Solutions
-  </a>. 
-  Todos los derechos reservados.
-</div>
+
+  <div class="text-center text-sm text-white-500 mt-10 border-t border-green-700 pt-4">
+    &copy; {new Date().getFullYear()}
+    <a href="https://ccsolution.cl" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-green-300">
+      CC IT&Solutions
+    </a>.
+    Todos los derechos reservados.
+  </div>
 </footer>
 
-<!-- MODAL OVERLAY -->
+<!-- MODAL -->
 {#if modalData}
+  <!-- Backdrop como hermano (no envuelve el panel) -->
   <div
-    class="fixed inset-0 z-[1000] flex items-center justify-center p-4"
-    role="dialog"
+    class="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm"
+    role="button"
+    tabindex="0"
     aria-modal="true"
-    aria-label={modalData.titulo}
+    aria-label="Cerrar modal"
     on:click={cerrarModal}
-  >
-    <!-- Backdrop -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') cerrarModal(); }}
+  ></div>
 
-    <!-- Panel -->
+  <!-- Panel -->
+  <div class="fixed inset-0 z-[1001] flex items-center justify-center p-4">
     <div
-      class="relative z-[1001] w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-gray-200 overflow-hidden animate-fade-in"
+      id="modal-panel"
+      class="relative w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-gray-200 overflow-hidden animate-fade-in focus:outline-none"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-desc"
+      tabindex="-1"
       on:click|stopPropagation
     >
       <button
         class="absolute top-3 right-3 inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/80 px-2.5 py-2 text-gray-700 hover:bg-white focus:outline-none shadow"
         on:click={cerrarModal}
         aria-label="Cerrar modal"
+        type="button"
       >
         ✕
       </button>
 
       <header class="px-5 pt-5 pb-3">
-        <h3 class="text-xl font-semibold text-gray-900">{modalData.titulo}</h3>
+        <h3 id="modal-title" class="text-xl font-semibold text-gray-900">{modalData.titulo}</h3>
+        <p id="modal-desc" class="sr-only">Ventana modal con información detallada.</p>
       </header>
 
       {#if modalData.video}
-        <div class="w-full aspect-video bg-black">
-          <video src={modalData.video} controls playsinline class="w-full h-full object-cover" />
+        <div class="w-full aspect-[16/9] bg-black">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            class="w-full h-full object-cover"
+          >
+            <source src={modalData.video} type="video/mp4" />
+            <track kind="captions" src="/captions/placeholder.vtt" srclang="es" label="Español" />
+            Tu navegador no soporta el elemento de video.
+          </video>
         </div>
       {/if}
 
@@ -521,6 +544,7 @@
         <button
           class="w-full rounded-lg bg-green-600 text-white py-2.5 hover:bg-green-700 transition"
           on:click={cerrarModal}
+          type="button"
         >
           Cerrar
         </button>
