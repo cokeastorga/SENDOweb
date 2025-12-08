@@ -255,9 +255,9 @@
 </section>
 
 <section id="servicios" class="relative py-20 px-4 overflow-hidden" aria-labelledby="servicios-title">
-  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="metadata">
+  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="none">
+    <source src="/tomandoprecion.webm" type="video/webm" />
     <source src="/tomandoprecion.mp4" type="video/mp4" />
-    Tu navegador no soporta videos HTML5.
   </video>
   <div class="absolute inset-0 bg-black/40 z-0"></div>
   <div class="relative z-10 text-green-400">
@@ -305,9 +305,9 @@
 </section>
 
 <section class="relative py-20 px-4 overflow-hidden" aria-labelledby="testimonios-title">
-  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="metadata">
+  <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="none">
+    <source src="/testimonio.webm" type="video/webm" />
     <source src="/testimonio.mp4" type="video/mp4" />
-    Tu navegador no soporta videos HTML5.
   </video>
   <div class="absolute inset-0 bg-black/50 z-0"></div>
   <div class="relative z-10 text-white">

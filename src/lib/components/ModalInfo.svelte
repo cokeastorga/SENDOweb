@@ -65,7 +65,7 @@
       <div class="flex-1 overflow-hidden bg-gray-50/50 flex flex-col md:flex-row">
         
         {#if modalData.videoBase}
-          <div class="w-full md:w-1/2 bg-black flex items-center justify-center shrink-0 h-auto md:h-full relative">
+          <div class="w-full md:w-1/2 bg-black flex items-center justify-center shrink-0 h-auto md:h-auto md:min-h-[400px] relative">
              <video
               class="w-auto h-auto max-w-full max-h-[45vh] md:max-h-full object-contain mx-auto"
               autoplay
@@ -112,8 +112,4 @@
     from { opacity: 0; transform: scale(0.95) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
   }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
 </style>
