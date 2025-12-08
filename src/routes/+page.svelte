@@ -202,9 +202,9 @@
 </svelte:head>
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 py-16 overflow-hidden">
-  <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="metadata">
+  <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" aria-hidden="true" preload="auto">
+    <source src="/abuela_computador.webm" type="video/webm" />
     <source src="/abuela_computador.mp4" type="video/mp4" />
-    Tu navegador no soporta el elemento de video.
   </video>
   <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-transparent z-10"></div>
   <div data-aos="fade-up" class="relative z-20 max-w-4xl mx-auto text-white px-4">
