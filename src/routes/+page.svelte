@@ -1,10 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
-
   // Firestore
   import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
   import { db } from '$lib/firebase';
+  // Componentes
+  import ModalInfo from '$lib/components/ModalInfo.svelte';
 
   // EmailJS (carga en cliente para evitar SSR issues)
   let emailjs: any = null;
@@ -18,8 +19,8 @@
   let mensaje = '';
   let enviado = false;
 
-  // Modal
-  type ModalData = { titulo: string; video?: string; contenido: string } | null;
+  // Modal - CAMBIO 1: Actualizamos el tipo para usar videoBase
+  type ModalData = { titulo: string; videoBase?: string; contenido: string } | null;
   let modalData: ModalData = null;
 
   // Form testimonios
@@ -31,12 +32,7 @@
   // Lista de testimonios desde Firestore
   let testimonios: Array<any> = [];
 
-  // Bloquear scroll del body cuando la modal está abierta
-  $: if (browser) {
-    document.body.style.overflow = modalData ? 'hidden' : '';
-  }
-
-  // ESC para cerrar
+  // ESC para cerrar (como respaldo, aunque el componente lo maneja)
   function onKeydown(e: KeyboardEvent) {
     if (e.key === 'Escape' && modalData) cerrarModal();
   }
@@ -55,18 +51,15 @@
     };
   });
 
-  function abrirModal(item: { title?: string; titulo?: string; video?: string; contenido: string }) {
+  // CAMBIO 2: Actualizamos la función para recibir videoBase
+  function abrirModal(item: { title?: string; titulo?: string; videoBase?: string; contenido: string }) {
     modalData = {
       titulo: item.title ?? item.titulo ?? 'Detalle',
-      video: item.video,
+      videoBase: item.videoBase,
       contenido: item.contenido
     };
-    // Llevar el foco a la ventana para accesibilidad
-    setTimeout(() => {
-      const el = document.getElementById('modal-panel');
-      el?.focus();
-    }, 0);
   }
+
   function cerrarModal() {
     modalData = null;
   }
@@ -109,12 +102,13 @@
     }
   };
 
+  // CAMBIO 3: Quitamos la extensión .mp4 de los videos
   const servicios = [
     {
       icon: '👩‍⚕️',
       title: 'Cuidadoras a Domicilio',
       desc: 'Atención de salud integral, administración de medicamentos, compañía y cuidado 24/7 en Santiago.',
-      video: '/temp.mp4',
+      videoBase: '/temp', // ANTES: '/temp.mp4'
       contenido: `
         <p>Nuestro servicio de enfermería a domicilio ofrece atención profesional en el hogar del paciente. Incluye:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
@@ -133,7 +127,7 @@
       icon: '🧪',
       title: 'Instalación de Dispositivos Médicos',
       desc: 'Sondas urinarias, sondas nasogástricas y tratamientos endovenosos con personal capacitado.',
-      video: '/suero.mp4',
+      videoBase: '/suero', // ANTES: '/suero.mp4'
       contenido: `
         <p>Atendemos a pacientes que requieren el uso diario de dispositivos médicos, brindando atención profesional. Nuestro servicio incluye:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
@@ -148,7 +142,7 @@
   const articulos = [
     {
       titulo: 'El hogar como espacio terapéutico',
-      video: '/terapia.mp4',
+      videoBase: '/terapia', // ANTES: '/terapia.mp4'
       contenido: `
         <p>El hogar no solo brinda comodidad, también promueve bienestar emocional, reduce el riesgo de hospitalizaciones y mejora el estado anímico del paciente.</p>
         <p class="mt-3">SENDO planifica actividades que ejecutan nuestras cuidadoras para brindar apoyo físico y emocional en el entorno familiar.</p>
@@ -156,7 +150,7 @@
     },
     {
       titulo: '¿Cuándo buscar un cuidador?',
-      video: '/medidorpresion.mp4',
+      videoBase: '/medidorpresion', // ANTES: '/medidorpresion.mp4'
       contenido: `
         <p>El envejecimiento puede dificultar actividades como bañarse, vestirse, alimentarse, movilizarse o recordar tareas cotidianas. Estas situaciones, junto con enfermedades crónicas o demencia, afectan la autonomía y la calidad de vida.</p>
         <p class="mt-3">Cuando las actividades diarias se ven comprometidas, es momento de considerar apoyo profesional para cuidar la salud del adulto mayor y evitar el desgaste de la familia.</p>
@@ -164,7 +158,7 @@
     },
     {
       titulo: 'La soledad como factor de riesgo',
-      video: '/soledad.mp4',
+      videoBase: '/soledad', // ANTES: '/soledad.mp4'
       contenido: `
         <p>La soledad en adultos mayores incrementa el riesgo de depresión, ansiedad, deterioro cognitivo y enfermedades físicas.</p>
         <p class="mt-3">Un cuidador no solo asiste físicamente, también aporta compañía y contención emocional, mitigando estos riesgos.</p>
@@ -197,14 +191,11 @@
   <meta name="twitter:description" content="Cuidadoras y enfermeria para el adulto mayor 24/7 en Santiago, Chile. Contacto por WhatsApp o correo.">
   <meta name="twitter:image" content="https://www.enfermeriasendo.cl/og-image.jpg">
 
-  <!-- Preloads -->
   <link rel="preload" href="/abuela_computador.mp4" as="video" type="video/mp4">
   <link rel="preload" href="/logo3.jpg" as="image">
 
-  <!-- AOS CSS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -239,12 +230,13 @@
 <section class="py-20 bg-blue-50 px-4" aria-labelledby="beneficios-title">
   <h2 id="beneficios-title" class="text-3xl md:text-5xl font-bold text-center text-green-600 mb-12" data-aos="fade-up">¿Por qué elegir SENDO?</h2>
   <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-    {#each [
-      'Atención disponible 24/7 en todas las comunas de Santiago',
-      'Personal calificado y evaluado rigurosamente',
-      'Servicio cálido, humanizado y flexible',
-      'Cuidadoras a domicilio según necesidad'
-    ] as beneficio, index}
+    {#each 
+      [
+        'Atención disponible 24/7 en todas las comunas de Santiago',
+        'Personal calificado y evaluado rigurosamente',
+        'Servicio cálido, humanizado y flexible',
+        'Cuidadoras a domicilio según necesidad'
+      ] as beneficio, index}
       <div class="flex items-start gap-3 bg-white rounded-xl p-4 shadow-md border border-blue-100" data-aos="fade-up" data-aos-delay="{index * 100}">
         <span class="text-xl text-green-600" aria-hidden="true">✅</span>
         <p class="text-gray-700 text-md">{beneficio}</p>
@@ -257,7 +249,7 @@
   <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
     <h2 id="quienes-title" class="text-3xl md:text-5xl font-bold text-green-600 mb-6">Quiénes Somos</h2>
     <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-      En <span class="font-semibold text-green-600">SENDO</span> contamos con más de 18 años de experiencia entregando atención personalizada, segura y especializada en el hogar. Nuestro equipo combina compromiso humano y excelencia técnica para mejorar la calidad de vida de cada paciente, con un enfoque centrado en quienes más lo necesitan.
+      En <span class="font-semibold text-green-600">SENDO</span>contamos con más de 18 años de experiencia entregando atención personalizada, segura y especializada en el hogar. Nuestro equipo combina compromiso humano y excelencia técnica para mejorar la calidad de vida de cada paciente, con un enfoque centrado en quienes más lo necesitan.
     </p>
   </div>
 </section>
@@ -325,6 +317,7 @@
         {#if testimonio.approved}
           <blockquote class="bg-white/90 text-gray-800 p-6 rounded-xl shadow border-l-4 border-green-400 backdrop-blur-md" data-aos="fade-up" data-aos-delay="{index * 100}">
             <p class="italic mb-2 text-md">“{testimonio.quote}”</p>
+            
             <div class="flex items-center gap-2 mb-2">
               {#each Array(Number(testimonio.rating) || 0) as _, i}
                 <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -338,7 +331,6 @@
       {/each}
     </div>
 
-    <!-- Formulario para nuevos testimonios -->
     <div class="max-w-xl mx-auto mt-12 bg-white/90 p-6 rounded-xl shadow-lg border border-gray-100 backdrop-blur-md" data-aos="fade-up" data-aos-delay="200" aria-labelledby="nuevo-testimonio-title">
       <h3 id="nuevo-testimonio-title" class="text-xl font-semibold text-gray-800 mb-4">Comparte tu experiencia</h3>
       {#if testimonioEnviado}
@@ -474,96 +466,20 @@
   </div>
 
   <div class="text-center text-sm text-white-500 mt-10 border-t border-green-700 pt-4">
-    &copy; {new Date().getFullYear()}
+    © {new Date().getFullYear()}
     <a href="https://ccsolution.cl" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-green-300">
       CC IT&Solutions
-    </a>.
-    Todos los derechos reservados.
+    </a>. Todos los derechos reservados.
   </div>
 </footer>
 
-<!-- MODAL -->
 {#if modalData}
-  <!-- Backdrop como hermano (no envuelve el panel) -->
-  <div
-    class="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm"
-    role="button"
-    tabindex="0"
-    aria-modal="true"
-    aria-label="Cerrar modal"
-    on:click={cerrarModal}
-    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') cerrarModal(); }}
-  ></div>
-
-  <!-- Panel -->
-  <div class="fixed inset-0 z-[1001] flex items-center justify-center p-4">
-    <div
-      id="modal-panel"
-      class="relative w-full max-w-2xl rounded-2xl bg-white shadow-2xl border border-gray-200 overflow-hidden animate-fade-in focus:outline-none"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-      aria-describedby="modal-desc"
-      tabindex="-1"
-      on:click|stopPropagation
-    >
-      <button
-        class="absolute top-3 right-3 inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/80 px-2.5 py-2 text-gray-700 hover:bg-white focus:outline-none shadow"
-        on:click={cerrarModal}
-        aria-label="Cerrar modal"
-        type="button"
-      >
-        ✕
-      </button>
-
-      <header class="px-5 pt-5 pb-3">
-        <h3 id="modal-title" class="text-xl font-semibold text-gray-900">{modalData.titulo}</h3>
-        <p id="modal-desc" class="sr-only">Ventana modal con información detallada.</p>
-      </header>
-
-      {#if modalData.video}
-        <div class="w-full aspect-[16/9] bg-black">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            class="w-full h-full object-cover"
-          >
-            <source src={modalData.video} type="video/mp4" />
-            <track kind="captions" src="/captions/placeholder.vtt" srclang="es" label="Español" />
-            Tu navegador no soporta el elemento de video.
-          </video>
-        </div>
-      {/if}
-
-      <div class="p-5 prose max-w-none">
-        {@html modalData.contenido}
-      </div>
-
-      <div class="px-5 pb-5">
-        <button
-          class="w-full rounded-lg bg-green-600 text-white py-2.5 hover:bg-green-700 transition"
-          on:click={cerrarModal}
-          type="button"
-        >
-          Cerrar
-        </button>
-      </div>
-    </div>
-  </div>
+  <ModalInfo {modalData} on:close={cerrarModal} />
 {/if}
 
 <style>
   :global(body) {
     font-family: 'Poppins', sans-serif;
-  }
-  .animate-fade-in {
-    animation: fadeIn 180ms ease-out forwards;
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  @keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
   }
   :global([data-aos]) {
     opacity: 1 !important;

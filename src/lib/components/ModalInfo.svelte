@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
 
-  export let modalData: { titulo: string; video?: string; contenido: string } | null;
+  export let modalData: { titulo: string; videoBase?: string; contenido: string } | null;
 
   const dispatch = createEventDispatcher();
   const handleClose = () => dispatch('close');
@@ -14,9 +14,9 @@
 
   onMount(() => {
     const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden'; // bloquea el fondo
+    document.body.style.overflow = 'hidden'; 
     window.addEventListener('keydown', onKeydown);
-    setTimeout(() => panelEl?.focus?.(), 0);
+    setTimeout(() => panelEl?.focus?.(), 50);
 
     return () => {
       document.body.style.overflow = prevOverflow;
@@ -27,86 +27,93 @@
 
 {#if modalData}
   <div
-    class="fixed inset-0 z-[1000] flex items-center justify-center p-4"
+    class="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6"
     role="dialog"
     aria-modal="true"
     aria-label={modalData.titulo}
-    on:click={handleClose}
   >
-    <!-- Backdrop -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div 
+      class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+      on:click={handleClose}
+      aria-hidden="true"
+    ></div>
 
-    <!-- Panel -->
     <div
       bind:this={panelEl}
-      tabindex="0"
-      class="relative z-[1001] w-full max-w-4xl bg-white shadow-2xl border border-gray-200
-             rounded-none sm:rounded-2xl focus:outline-none
-             flex flex-col min-h-0 max-h-[90vh]"  
+      tabindex="-1"
+      class="relative z-[1001] w-full max-w-5xl bg-white shadow-2xl border border-gray-100
+             rounded-xl sm:rounded-2xl focus:outline-none overflow-hidden
+             flex flex-col max-h-[95vh] sm:max-h-[85vh] animate-modal-entry"
       on:click|stopPropagation
     >
-      <!-- Header sticky con título y cerrar -->
-      <div class="sticky top-0 z-10 flex items-center gap-3 bg-white/95 backdrop-blur px-4 py-3 border-b">
-        <h2 class="text-lg font-semibold text-gray-900 flex-1 line-clamp-1">{modalData.titulo}</h2>
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white sticky top-0 z-20 shrink-0">
+        <h2 class="text-xl md:text-2xl font-bold text-green-700 line-clamp-1 pr-4">
+          {modalData.titulo}
+        </h2>
         <button
           on:click={handleClose}
-          class="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white px-2.5 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none shadow"
+          class="group relative flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 text-gray-500 
+                 hover:bg-red-50 hover:text-red-600 transition-all duration-200 focus:ring-2 focus:ring-red-200 outline-none cursor-pointer"
           aria-label="Cerrar modal"
         >
-          ✕
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
 
-      <!-- Contenido scrolleable -->
-      <div class="flex-1 min-h-0 overflow-y-auto -webkit-overflow-scrolling-touch">
-        <!-- Grid responsiva -->
-        <div class="grid md:grid-cols-2">
-          <!-- Video -->
-          <div class="w-full bg-black flex items-center justify-center">
-            {#if modalData.video}
-              <video
-                src={modalData.video}
-                class="w-full h-auto max-h-[40vh] md:max-h-[360px] object-contain"
-                autoplay
-                muted
-                loop
-                playsinline
-                controls
-              />
-            {/if}
+      <div class="flex-1 overflow-hidden bg-gray-50/50 flex flex-col md:flex-row">
+        
+        {#if modalData.videoBase}
+          <div class="w-full md:w-1/2 bg-black flex items-center justify-center shrink-0 h-auto md:h-full relative">
+             <video
+              class="w-auto h-auto max-w-full max-h-[45vh] md:max-h-full object-contain mx-auto"
+              autoplay
+              muted
+              loop
+              playsinline
+              controls
+            >
+              <source src="{modalData.videoBase}.webm" type="video/webm" />
+              <source src="{modalData.videoBase}.mp4" type="video/mp4" />
+              Tu navegador no soporta videos.
+            </video>
           </div>
+        {/if}
 
-          <!-- Texto -->
-          <div class="p-6">
-            <div class="prose prose-sm max-w-none text-gray-700 leading-relaxed">
+        <div class="flex-1 flex flex-col min-h-0 bg-white">
+          <div class="flex-1 overflow-y-auto p-6 md:p-8 touch-scroll">
+            <div class="prose prose-slate prose-sm md:prose-base prose-headings:text-green-800 max-w-none">
               {@html modalData.contenido}
             </div>
+          </div>
 
-            <div class="mt-6">
-              <button
-                class="w-full rounded-lg bg-green-600 text-white py-2.5 hover:bg-green-700 transition"
-                on:click={handleClose}
-              >
-                Cerrar
-              </button>
-            </div>
+          <div class="p-4 md:p-6 border-t border-gray-100 bg-white shrink-0">
+            <button
+              class="w-full sm:w-auto ml-auto px-6 py-2.5 rounded-lg bg-green-600 text-white font-medium 
+                     hover:bg-green-700 active:transform active:scale-95 transition-all shadow-lg shadow-green-200
+                     flex items-center justify-center gap-2 cursor-pointer"
+              on:click={handleClose}
+            >
+              <span>Entendido</span>
+            </button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 {/if}
 
 <style>
-  /* iOS scroll suave dentro del modal */
   .touch-scroll { -webkit-overflow-scrolling: touch; }
-
-  .fade-in {
-    animation: fadeIn 180ms ease-out forwards;
-    opacity: 0;
-    transform: translateY(4px);
+  .animate-modal-entry { animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
   }
-  @keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
 </style>
