@@ -199,6 +199,43 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+{
+      "@context": "https://schema.org",
+      "@type": "MedicalBusiness",
+      "name": "SENDO - Servicios de Enfermería",
+      "image": "https://www.enfermeriasendo.cl/logo4.png",
+      "url": "https://www.enfermeriasendo.cl",
+      "telephone": "+56998451117",
+      "email": "sendo.eirl@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santiago",
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.4489,
+        "longitude": -70.6693
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "priceRange": "$$",
+      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7, procedimientos médicos, cuidado de adulto mayor y postoperatorios."
+    }
 </svelte:head>
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 py-16 overflow-hidden">
