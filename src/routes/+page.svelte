@@ -234,7 +234,7 @@
         "closes": "23:59"
       },
       "priceRange": "$$",
-      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7, procedimientos médicos, cuidado de adulto mayor y postoperatorios."
+      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7, procedimientos médicos, cuidado de adulto mayor y postoperatorios. Cuidadoras para tercera edad - sector oriente - particular - alzheimer "
     }
 </svelte:head>
 
