@@ -220,11 +220,11 @@
   />
   <meta
     property="og:description"
-    content="Atención profesional 24/7 en el hogar: cuidadoras, sondas, tratamientos endovenosos y más en Santiago, Chile."
+    content="Atención profesional 24/7 en el hogar: cuidadoras, sondas, tratamientos endovenosos y más en Santiago, Las Condes, Nuñoa, Providencia, Chile."
   />
   <meta
     property="og:image"
-    content="https://www.enfermeriasendo.cl/og-image.jpg"
+    content="https://www.enfermeriasendo.cl/logo3.jpg"
   />
   <meta property="og:url" content="https://www.enfermeriasendo.cl" />
   <meta property="og:type" content="website" />
@@ -232,7 +232,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta
     name="twitter:title"
-    content="SENDO - Enfermeria a Domicilio en Santiago"
+    content="SENDO - Enfermeria/Cuidadoras a Domicilio en Santiago"
   />
   <meta
     name="twitter:description"
