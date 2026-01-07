@@ -200,6 +200,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+<script type="application/ld+json">
 {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
@@ -234,8 +235,9 @@
         "closes": "23:59"
       },
       "priceRange": "$$",
-      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7, procedimientos médicos, cuidado de adulto mayor y postoperatorios. Cuidadoras para tercera edad - sector oriente - particular - alzheimer "
+      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7, procedimientos médicos, cuidado de adulto mayor y postoperatorios. Cuidadoras para tercera edad - sector oriente - particular - alzheimer"
     }
+</script>
 </svelte:head>
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 py-16 overflow-hidden">
