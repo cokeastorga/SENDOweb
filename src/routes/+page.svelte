@@ -343,7 +343,7 @@
       Bienvenidos a <span class="text-green-400">SENDO</span>
     </h1>
     <p class="text-lg md:text-2xl mb-2 drop-shadow">
-      Servicio de Enfermería Domiciliaria en Santiago
+      Servicio de Cuidadoras para tercera edad o Adulto mayor en Santiago-Oriente
     </p>
     <p class="text-lg md:text-2xl mb-10 drop-shadow">Desde 2007</p>
     <a
@@ -405,7 +405,7 @@
         Nuestro equipo combina compromiso humano y capacitación técnica para mejorar la calidad de vida de cada paciente, ayudándolos en sus quehaceres diarios y brindándoles compañía con un enfoque centrado en la cercanía y el respeto.
       </p>
       <p>
-        El servicio es realizado por personal de apoyo a domicilio, cuya finalidad es estimular y asistir a los adultos mayores o enfermos en su rutina, aumentando su bienestar diario. A su vez, ofrecemos <strong>asistencia de enfermería a domicilio y hospitalización en casa</strong>. Realizamos la administración de múltiples tratamientos y servicios de enfermería según receta médica, a cargo de un equipo especializado con larga experiencia. Disponemos del equipo y el material clínico necesario.
+        El servicio es realizado por personal de apoyo en el domicilio, cuya finalidad es estimular y asistir a los adultos mayores o enfermos en su rutina, aumentando su bienestar diario. A su vez, ofrecemos <strong>asistencia de enfermería a domicilio y hospitalización en casa</strong>. Realizamos la administración de múltiples tratamientos y servicios de enfermería o de cuidadoras para tercera edad según receta médica, a cargo de un equipo especializado con larga experiencia. Disponemos del equipo y la experiencia clínica necesaria.
       </p>
     </div>
   </div>
@@ -914,7 +914,7 @@
       target="_blank"
       rel="noopener noreferrer"
       class="hover:underline hover:text-green-300"
-    >
+    > 
       CC IT&Solutions
     </a>. Todos los derechos reservados.
   </div>
