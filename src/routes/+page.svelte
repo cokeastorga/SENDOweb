@@ -203,7 +203,7 @@
   />
   <meta
     name="keywords"
-    content="enfermeria a domicilio, cuidadoras a domicilio, atencion medica en casa, Santiago, adultos mayores, postoperatorio, sondas urinarias, tratamientos endovenosos, enfermeras santiago, cuidadoras santiago SENDO, Las Condes, Vitacura, Lo Barnechea y todo Santiago. Atención 24/7 para adulto mayor y postoperatorios. SENDO, enfermeria sendo, cuidadoras en santiago, cuidadoras a domicilio en santiago, cuidadora, cuidadora de ancianos, cuidadoras de tercera edad, cuidadoras las condes, cuidadoras nuñoa, mejores empresas de cudiados de ancianos, mejor empresa de chile en cuidado de ancianos, empresa premiada por trayectoria"
+    content="enfermeria a domicilio, cuidadoras a domicilio, atencion medica en casa, Santiago, adultos mayores, postoperatorio, sondas urinarias, tratamientos endovenosos, enfermeras santiago, cuidadoras santiago SENDO, Las Condes, Vitacura, Lo Barnechea y todo Santiago. Atención 24/7 para adulto mayor y postoperatorios. SENDO, enfermeria sendo, cuidadoras en santiago, cuidadoras a domicilio en santiago, cuidadora, cuidadora de ancianos, cuidadoras de tercera edad, cuidadoras las condes, cuidadoras nuñoa, mejores empresas de cudiados de ancianos, mejor empresa de chile en cuidado de ancianos,cuidadoras de enfermo a domicilio santiago, cuidadoras a domicilio, domicilio, cuidadoras, empresa premiada por trayectoria"
   />
   <meta name="robots" content="index, follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -220,7 +220,7 @@
   />
   <meta
     property="og:description"
-    content="Atención profesional 24/7 en el hogar: cuidadoras, sondas, tratamientos endovenosos y más en Santiago, Las Condes, Nuñoa, Providencia, Chile."
+    content="Atención profesional 24/7 en el hogar: cuidadoras a domicilio, sondas, tratamientos endovenosos y más en Santiago, Las Condes, Nuñoa, Providencia, Chile."
   />
   <meta
     property="og:image"
@@ -264,7 +264,7 @@
     {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
-      "name": "SENDO - Servicios de Enfermería",
+      "name": "SENDO - Servicios de Enfermería a domicilio",
       "image": "https://www.enfermeriasendo.cl/logo4.png",
       "url": "https://www.enfermeriasendo.cl",
       "telephone": "+56998451117",
