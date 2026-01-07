@@ -26,7 +26,7 @@
   let mensaje = "";
   let enviado = false;
 
-  // Modal - CAMBIO 1: Actualizamos el tipo para usar videoBase
+  // Modal
   type ModalData = {
     titulo: string;
     videoBase?: string;
@@ -43,7 +43,7 @@
   // Lista de testimonios desde Firestore
   let testimonios: Array<any> = [];
 
-  // ESC para cerrar (como respaldo, aunque el componente lo maneja)
+  // ESC para cerrar
   function onKeydown(e: KeyboardEvent) {
     if (e.key === "Escape" && modalData) cerrarModal();
   }
@@ -65,7 +65,6 @@
     };
   });
 
-  // CAMBIO 2: Actualizamos la función para recibir videoBase
   function abrirModal(item: {
     title?: string;
     titulo?: string;
@@ -131,13 +130,12 @@
     }
   };
 
-  // CAMBIO 3: Quitamos la extensión .mp4 de los videos
   const servicios = [
     {
       icon: "👩‍⚕️",
       title: "Cuidadoras a Domicilio",
       desc: "Atención de salud integral, administración de medicamentos, compañía y cuidado 24/7 en Santiago.",
-      videoBase: "/temp", // ANTES: '/temp.mp4'
+      videoBase: "/temp",
       contenido: `
         <p>Nuestro servicio de enfermería a domicilio ofrece atención profesional en el hogar del paciente. Incluye:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
@@ -156,7 +154,7 @@
       icon: "🧪",
       title: "Instalación de Dispositivos Médicos",
       desc: "Sondas urinarias, sondas nasogástricas y tratamientos endovenosos con personal capacitado.",
-      videoBase: "/suero", // ANTES: '/suero.mp4'
+      videoBase: "/suero",
       contenido: `
         <p>Atendemos a pacientes que requieren el uso diario de dispositivos médicos, brindando atención profesional. Nuestro servicio incluye:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
@@ -171,7 +169,7 @@
   const articulos = [
     {
       titulo: "El hogar como espacio terapéutico",
-      videoBase: "/terapia", // ANTES: '/terapia.mp4'
+      videoBase: "/terapia",
       contenido: `
         <p>El hogar no solo brinda comodidad, también promueve bienestar emocional, reduce el riesgo de hospitalizaciones y mejora el estado anímico del paciente.</p>
         <p class="mt-3">SENDO planifica actividades que ejecutan nuestras cuidadoras para brindar apoyo físico y emocional en el entorno familiar.</p>
@@ -179,7 +177,7 @@
     },
     {
       titulo: "¿Cuándo buscar un cuidador?",
-      videoBase: "/medidorpresion", // ANTES: '/medidorpresion.mp4'
+      videoBase: "/medidorpresion",
       contenido: `
         <p>El envejecimiento puede dificultar actividades como bañarse, vestirse, alimentarse, movilizarse o recordar tareas cotidianas. Estas situaciones, junto con enfermedades crónicas o demencia, afectan la autonomía y la calidad de vida.</p>
         <p class="mt-3">Cuando las actividades diarias se ven comprometidas, es momento de considerar apoyo profesional para cuidar la salud del adulto mayor y evitar el desgaste de la familia.</p>
@@ -187,7 +185,7 @@
     },
     {
       titulo: "La soledad como factor de riesgo",
-      videoBase: "/soledad", // ANTES: '/soledad.mp4'
+      videoBase: "/soledad",
       contenido: `
         <p>La soledad en adultos mayores incrementa el riesgo de depresión, ansiedad, deterioro cognitivo y enfermedades físicas.</p>
         <p class="mt-3">Un cuidador no solo asiste físicamente, también aporta compañía y contención emocional, mitigando estos riesgos.</p>
@@ -197,7 +195,8 @@
 </script>
 
 <svelte:head>
-  <title>SENDO - Enfermería y Cuidadoras a Domicilio en Santiago</title>
+  <title>Enfermeras y Cuidadoras a Domicilio - Sector Oriente y Santiago - SENDO</title>
+  
   <meta
     name="description"
     content="Servicios de enfermería y cuidadoras a domicilio en Las Condes, Vitacura, Lo Barnechea y todo Santiago. Atención 24/7 para adulto mayor y postoperatorios."
@@ -262,7 +261,7 @@
   />
 
   <script type="application/ld+json">
-{
+    {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
       "name": "SENDO - Servicios de Enfermería",
@@ -274,6 +273,9 @@
         { "@type": "City", "name": "Las Condes" },
         { "@type": "City", "name": "Vitacura" },
         { "@type": "City", "name": "Lo Barnechea" },
+        { "@type": "City", "name": "La Reina" },
+        { "@type": "City", "name": "Ñuñoa" },
+        { "@type": "City", "name": "Chicureo" },
         { "@type": "City", "name": "Santiago" }
       ],
       "address": {
@@ -395,7 +397,7 @@
   class="py-20 bg-white px-4"
   aria-labelledby="quienes-title"
 >
-  <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+  <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
     <h2
       id="quienes-title"
       class="text-3xl md:text-5xl font-bold text-green-600 mb-6"
@@ -403,12 +405,12 @@
       Quiénes Somos
     </h2>
     <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-      En <span class="font-semibold text-green-600">SENDO</span>contamos con más
-      de 18 años de experiencia en el cuidado del adulto mayor o tecera edad de forma segura y
-      especializada a domicilio en comunas de Santiago-Oriente como La Reina, Las Condes, Nuñoa, Vitacura, La Dehesa, Lo Barnechea y también Chicureo. 
+      En <span class="font-semibold text-green-600">SENDO</span> contamos con más
+      de 18 años de experiencia en el cuidado del adulto mayor y tercera edad de forma segura y
+      especializada a domicilio en comunas de Santiago-Oriente como <strong class="text-green-700">La Reina, Las Condes, Ñuñoa, Vitacura, La Dehesa, Lo Barnechea y también Chicureo</strong>. 
       Nuestro equipo combina compromiso humano y
-      capacitación técnica para mejorar la calidad de vida de cada paciente ayudandolos en sus que haceres diarios como también brindandoles compañia con
-      un enfoque centrado en la cercania y el respeto.
+      capacitación técnica para mejorar la calidad de vida de cada paciente ayudándolos en sus quehaceres diarios como también brindándoles compañía con
+      un enfoque centrado en la cercanía y el respeto.
     </p>
   </div>
 </section>
@@ -721,9 +723,9 @@
   <h3 class="text-2xl font-bold text-green-600 mb-4">
     Cobertura Especializada en Sector Oriente
   </h3>
-  <p class="text-gray-600 max-w-3xl mx-auto">
+  <p class="text-gray-600 max-w-3xl mx-auto px-4">
     Atención prioritaria y rápida en <strong
-      >Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa</strong
+      >Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia, Ñuñoa y Chicureo</strong
     >. También cubrimos otras comunas de la Región Metropolitana.
   </p>
 </section>
