@@ -137,7 +137,7 @@
       desc: "Atención de salud integral, administración de medicamentos, compañía y cuidado 24/7 en Santiago.",
       videoBase: "/temp",
       contenido: `
-        <p>Nuestro servicio de enfermería a domicilio ofrece atención profesional en el hogar del paciente. Incluye:</p>
+        <p>Nuestro servicios de cuidadoras a domicilio ofrece atención capacitada en el hogar del paciente. Incluye:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
           <li>Administración de medicamentos por vía oral, tópica, inhalatoria, enteral, parenteral, intradérmica, subcutánea e intramuscular.</li>
           <li>Control de signos vitales: presión arterial, saturación de oxígeno, frecuencia cardíaca, frecuencia respiratoria y temperatura corporal.</li>
@@ -147,7 +147,7 @@
           <li>Prevención de úlceras por decúbito.</li>
           <li>Apoyo clínico general y primeros auxilios.</li>
         </ul>
-        <p class="mt-4">Ideal para pacientes postoperatorios, personas con enfermedades crónicas, adultos mayores y quienes requieran seguimiento médico en casa.</p>
+        <p class="mt-4">Ideal para pacientes que necesiten cuidadoras para postoperatorios, personas con enfermedades crónicas, adultos mayores y quienes requieran seguimiento médico en casa.</p>
       `,
     },
     {
