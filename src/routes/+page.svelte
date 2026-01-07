@@ -392,26 +392,22 @@
   </div>
 </section>
 
-<section
-  id="quienes"
-  class="py-20 bg-white px-4"
-  aria-labelledby="quienes-title"
->
+<section id="quienes" class="py-20 bg-white px-4" aria-labelledby="quienes-title">
   <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-    <h2
-      id="quienes-title"
-      class="text-3xl md:text-5xl font-bold text-green-600 mb-6"
-    >
+    <h2 id="quienes-title" class="text-3xl md:text-5xl font-bold text-green-600 mb-6">
       Quiénes Somos
     </h2>
-    <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-      En <span class="font-semibold text-green-600">SENDO</span> contamos con más
-      de 18 años de experiencia en el cuidado del adulto mayor y tercera edad de forma segura y
-      especializada a domicilio en comunas de Santiago-Oriente como <strong class="text-green-700">La Reina, Las Condes, Ñuñoa, Vitacura, La Dehesa, Lo Barnechea y también Chicureo</strong>. 
-      Nuestro equipo combina compromiso humano y
-      capacitación técnica para mejorar la calidad de vida de cada paciente ayudándolos en sus quehaceres diarios como también brindándoles compañía con
-      un enfoque centrado en la cercanía y el respeto.
-    </p>
+    <div class="text-base md:text-lg text-gray-600 leading-relaxed space-y-4">
+      <p>
+        En <span class="font-semibold text-green-600">SENDO</span> contamos con más de 18 años de experiencia en el cuidado del adulto mayor y tercera edad de forma segura y especializada a domicilio en comunas de Santiago-Oriente como <strong class="text-green-700">La Reina, Las Condes, Ñuñoa, Vitacura, La Dehesa, Lo Barnechea y también Chicureo</strong>.
+      </p>
+      <p>
+        Nuestro equipo combina compromiso humano y capacitación técnica para mejorar la calidad de vida de cada paciente, ayudándolos en sus quehaceres diarios y brindándoles compañía con un enfoque centrado en la cercanía y el respeto.
+      </p>
+      <p>
+        El servicio es realizado por personal de apoyo a domicilio, cuya finalidad es estimular y asistir a los adultos mayores o enfermos en su rutina, aumentando su bienestar diario. A su vez, ofrecemos <strong>asistencia de enfermería a domicilio y hospitalización en casa</strong>. Realizamos la administración de múltiples tratamientos y servicios de enfermería según receta médica, a cargo de un equipo especializado con larga experiencia. Disponemos del equipo y el material clínico necesario.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -872,7 +868,7 @@
       </ul>
       <div class="mt-6 flex justify-center md:justify-start gap-4">
         <a
-          href="https://facebook.com/tupagina"
+          href="https://www.facebook.com/pages/Sendo/107147515985494/"
           target="_blank"
           class="text-gray-400 hover:text-green-400 transition"
           aria-label="Facebook de SENDO"
@@ -889,7 +885,7 @@
           </svg>
         </a>
         <a
-          href="https://instagram.com/tuperfil"
+          href="https://instagram.com/"
           target="_blank"
           class="text-gray-400 hover:text-green-400 transition"
           aria-label="Instagram de SENDO"
