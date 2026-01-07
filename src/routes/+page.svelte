@@ -275,7 +275,7 @@
         { "@type": "City", "name": "Vitacura" },
         { "@type": "City", "name": "Lo Barnechea" },
         { "@type": "City", "name": "Santiago" }
-      ]
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Santiago",
@@ -404,10 +404,11 @@
     </h2>
     <p class="text-base md:text-lg text-gray-600 leading-relaxed">
       En <span class="font-semibold text-green-600">SENDO</span>contamos con más
-      de 18 años de experiencia entregando atención personalizada, segura y
-      especializada en el hogar. Nuestro equipo combina compromiso humano y
-      excelencia técnica para mejorar la calidad de vida de cada paciente, con
-      un enfoque centrado en quienes más lo necesitan.
+      de 18 años de experiencia en el cuidado del adulto mayor o tecera edad de forma segura y
+      especializada a domicilio en comunas de Santiago-Oriente como La Reina, Las Condes, Nuñoa, Vitacura, La Dehesa, Lo Barnechea y también Chicureo. 
+      Nuestro equipo combina compromiso humano y
+      capacitación técnica para mejorar la calidad de vida de cada paciente ayudandolos en sus que haceres diarios como también brindandoles compañia con
+      un enfoque centrado en la cercania y el respeto.
     </p>
   </div>
 </section>
