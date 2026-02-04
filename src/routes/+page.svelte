@@ -13,7 +13,6 @@
   import { db } from "$lib/firebase";
   // Componentes
   import ModalInfo from "$lib/components/ModalInfo.svelte";
-
   // EmailJS (carga en cliente para evitar SSR issues)
   let emailjs: any = null;
   if (browser) {
@@ -42,7 +41,6 @@
 
   // Lista de testimonios desde Firestore
   let testimonios: Array<any> = [];
-
   // ESC para cerrar
   function onKeydown(e: KeyboardEvent) {
     if (e.key === "Escape" && modalData) cerrarModal();
@@ -64,7 +62,6 @@
       unsubscribe();
     };
   });
-
   function abrirModal(item: {
     title?: string;
     titulo?: string;
@@ -130,80 +127,81 @@
     }
   };
 
+  // TEXTOS DE SERVICIOS ACTUALIZADOS (Directos + Cierre con experiencia)
   const servicios = [
     {
       icon: "👩‍⚕️",
       title: "Cuidadoras a Domicilio",
-      desc: "Atención de salud integral, administración de medicamentos, compañía y cuidado 24/7 en Santiago.",
+      desc: "Atención integral, administración de medicamentos, compañía y cuidado 24/7 en Santiago.",
       videoBase: "/temp",
       contenido: `
-        <p>Nuestro servicios de cuidadoras a domicilio ofrece atención capacitada en el hogar del paciente. Incluye:</p>
+        <p>El cuidado en casa requiere más que buenas intenciones; exige conocimientos técnicos y dedicación. Nuestro servicio incluye:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
-          <li>Administración de medicamentos por vía oral, tópica, inhalatoria, enteral, parenteral, intradérmica, subcutánea e intramuscular.</li>
-          <li>Control de signos vitales: presión arterial, saturación de oxígeno, frecuencia cardíaca, frecuencia respiratoria y temperatura corporal.</li>
-          <li>Oxigenoterapia.</li>
-          <li>Nebulización.</li>
-          <li>Aspiración de secreciones.</li>
-          <li>Prevención de úlceras por decúbito.</li>
-          <li>Apoyo clínico general y primeros auxilios.</li>
+          <li>Administración profesional de medicamentos (oral, inyectable, etc.).</li>
+          <li>Control riguroso de signos vitales.</li>
+          <li>Manejo de oxigenoterapia y nebulización.</li>
+          <li>Prevención y curación de úlceras por presión.</li>
+          <li>Aseo, confort y apoyo clínico constante.</li>
         </ul>
-        <p class="mt-4">Ideal para pacientes que necesiten cuidadoras para postoperatorios, personas con enfermedades crónicas, adultos mayores y quienes requieran seguimiento médico en casa.</p>
+        <p class="mt-4 font-semibold text-green-800">Entendemos la complejidad de las enfermedades crónicas y los postoperatorios. Por eso, en SENDO ponemos a tu disposición cuidadoras con experiencia para garantizar la seguridad clínica y emocional que tu familia necesita.</p>
       `,
     },
     {
       icon: "🧪",
-      title: "Instalación de Dispositivos Médicos",
-      desc: "Sondas urinarias, sondas nasogástricas y tratamientos endovenosos con personal capacitado.",
+      title: "Procedimientos de Enfermería",
+      desc: "Instalación de sondas, manejo de ostomías y tratamientos endovenosos por expertos.",
       videoBase: "/suero",
       contenido: `
-        <p>Atendemos a pacientes que requieren el uso diario de dispositivos médicos, brindando atención profesional. Nuestro servicio incluye:</p>
+        <p>Ciertos tratamientos médicos no pueden dejarse al azar. Realizamos procedimientos complejos en la comodidad del hogar:</p>
         <ul class="list-disc pl-5 space-y-1 mt-2">
-          <li>Manejo de sondas urinarias, nasogástricas y gástricas (PEG).</li>
-          <li>Colostomías y traqueostomías.</li>
+          <li>Instalación y manejo de sondas (urinarias, nasogástricas, PEG).</li>
+          <li>Cuidados de colostomías y traqueostomías.</li>
+          <li>Tratamientos endovenosos y manejo de vías.</li>
         </ul>
-        <p class="mt-4">Un servicio esencial para garantizar el confort, la seguridad y el correcto funcionamiento de los dispositivos médicos.</p>
+        <p class="mt-4 font-semibold text-green-800">Evita traslados innecesarios y riesgos de infección intrahospitalaria. Nuestro equipo de enfermería lleva la clínica a tu casa con la seguridad y esterilidad que el paciente requiere.</p>
       `,
     },
   ];
 
+  // TEXTOS DE ARTÍCULOS ACTUALIZADOS (Problema -> Solución SENDO)
   const articulos = [
     {
       titulo: "El hogar como espacio terapéutico",
       videoBase: "/terapia",
       contenido: `
-        <p>El hogar no solo brinda comodidad, también promueve bienestar emocional, reduce el riesgo de hospitalizaciones y mejora el estado anímico del paciente.</p>
-        <p class="mt-3">SENDO planifica actividades que ejecutan nuestras cuidadoras para brindar apoyo físico y emocional en el entorno familiar.</p>
+        <p>Está demostrado que el entorno familiar reduce el estrés, disminuye el riesgo de infecciones hospitalarias y acelera la recuperación anímica del paciente.</p>
+        <p class="mt-3 font-semibold text-green-800">En SENDO potenciamos estos beneficios llevando la atención profesional directamente a tu puerta, transformando tu hogar en el lugar más seguro y cómodo para sanar.</p>
       `,
     },
     {
-      titulo: "¿Cuándo buscar un cuidador?",
+      titulo: "¿Cuándo buscar ayuda profesional?",
       videoBase: "/medidorpresion",
       contenido: `
-        <p>El envejecimiento puede dificultar actividades como bañarse, vestirse, alimentarse, movilizarse o recordar tareas cotidianas. Estas situaciones, junto con enfermedades crónicas o demencia, afectan la autonomía y la calidad de vida.</p>
-        <p class="mt-3">Cuando las actividades diarias se ven comprometidas, es momento de considerar apoyo profesional para cuidar la salud del adulto mayor y evitar el desgaste de la familia.</p>
+        <p>Cuando actividades básicas como bañarse, vestirse o administrarse medicamentos se vuelven un riesgo o una carga excesiva para la familia, es momento de actuar.</p>
+        <p class="mt-3 font-semibold text-green-800">No esperes a que ocurra un accidente. Nuestra experiencia de más de 18 años nos permite intervenir a tiempo, devolviendo la tranquilidad a la familia y la dignidad al paciente.</p>
       `,
     },
     {
-      titulo: "La soledad como factor de riesgo",
+      titulo: "Combatir la soledad y el deterioro",
       videoBase: "/soledad",
       contenido: `
-        <p>La soledad en adultos mayores incrementa el riesgo de depresión, ansiedad, deterioro cognitivo y enfermedades físicas.</p>
-        <p class="mt-3">Un cuidador no solo asiste físicamente, también aporta compañía y contención emocional, mitigando estos riesgos.</p>
+        <p>La soledad en la vejez es un factor crítico que acelera el deterioro cognitivo y la depresión. El aislamiento es tan peligroso como una enfermedad física.</p>
+        <p class="mt-3 font-semibold text-green-800">Nuestras cuidadoras no son solo asistencia física; son compañía, conversación y contención. En SENDO cuidamos la salud emocional porque sabemos que es vital para la calidad de vida.</p>
       `,
     },
   ];
 </script>
 
 <svelte:head>
-  <title>Enfermeras y Cuidadoras a Domicilio - Sector Oriente y Santiago - SENDO</title>
+  <title>SENDO - Enfermería y Cuidadoras a Domicilio en Santiago Oriente</title>
   
   <meta
     name="description"
-    content="Servicios de enfermería y cuidadoras a domicilio en Las Condes, Vitacura, Lo Barnechea y todo Santiago. Atención 24/7 para adulto mayor y postoperatorios."
+    content="Servicios de enfermería y cuidadoras a domicilio en Las Condes, Vitacura, Lo Barnechea y todo Santiago. Más de 18 años de experiencia en cuidado de adulto mayor."
   />
   <meta
     name="keywords"
-    content="enfermeria a domicilio, cuidadoras a domicilio, atencion medica en casa, Santiago, adultos mayores, postoperatorio, sondas urinarias, tratamientos endovenosos, enfermeras santiago, cuidadoras santiago SENDO, Las Condes, Vitacura, Lo Barnechea y todo Santiago. Atención 24/7 para adulto mayor y postoperatorios. SENDO, enfermeria sendo, cuidadoras en santiago, cuidadoras a domicilio en santiago, cuidadora, cuidadora de ancianos, cuidadoras de tercera edad, cuidadoras las condes, cuidadoras nuñoa, mejores empresas de cudiados de ancianos, mejor empresa de chile en cuidado de ancianos,cuidadoras de enfermo a domicilio santiago, cuidadoras a domicilio, domicilio, cuidadoras, empresa premiada por trayectoria"
+    content="enfermeria a domicilio, cuidadoras a domicilio, santiago, adulto mayor, postoperatorio, sondas, tratamientos endovenosos, enfermeras santiago, SENDO, cuidados tercera edad, las condes, vitacura, lo barnechea, ñuñoa"
   />
   <meta name="robots" content="index, follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -216,11 +214,11 @@
   <link rel="canonical" href="https://www.enfermeriasendo.cl" />
   <meta
     property="og:title"
-    content="SENDO - Enfermeria y Cuidadoras a Domicilio en Santiago"
+    content="SENDO - Experiencia en Cuidadoras a Domicilio"
   />
   <meta
     property="og:description"
-    content="Atención profesional 24/7 en el hogar: cuidadoras a domicilio, sondas, tratamientos endovenosos y más en Santiago, Las Condes, Nuñoa, Providencia, Chile."
+    content="Atención profesional 24/7 en el hogar. Expertos en adulto mayor y procedimientos de enfermería en sector oriente y Santiago."
   />
   <meta
     property="og:image"
@@ -232,11 +230,11 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta
     name="twitter:title"
-    content="SENDO - Enfermeria/Cuidadoras a Domicilio en Santiago"
+    content="SENDO - Cuidadoras y Enfermería en Santiago"
   />
   <meta
     name="twitter:description"
-    content="Cuidadoras y enfermeria para el adulto mayor 24/7 en Santiago, Chile. Contacto por WhatsApp o correo."
+    content="Más de 18 años cuidando a adultos mayores en Santiago. Contacto inmediato."
   />
   <meta
     name="twitter:image"
@@ -304,7 +302,7 @@
         "closes": "23:59"
       },
       "priceRange": "$$",
-      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7, procedimientos médicos, cuidado de adulto mayor y postoperatorios. Cuidadoras para tercera edad - sector oriente - particular - alzheimer"
+      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7 con más de 18 años de experiencia."
     }
   </script>
 </svelte:head>
@@ -343,9 +341,9 @@
       Bienvenidos a <span class="text-green-400">SENDO</span>
     </h1>
     <p class="text-lg md:text-2xl mb-2 drop-shadow">
-      Servicio de Cuidadoras para tercera edad o Adulto mayor en Santiago-Oriente
+      Especialistas en el cuidado del <span class="text-green-300 font-semibold">Adulto Mayor</span> a domicilio
     </p>
-    <p class="text-lg md:text-2xl mb-10 drop-shadow">Desde 2007</p>
+    <p class="text-lg md:text-2xl mb-10 drop-shadow">Trayectoria y Confianza desde 2007</p>
     <a
       href="#servicios"
       class="inline-flex items-center gap-3 px-8 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition text-lg font-semibold"
@@ -379,7 +377,7 @@
     ¿Por qué elegir SENDO?
   </h2>
   <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-    {#each ["Atención disponible 24/7 en todas las comunas de Santiago", "Personal calificado y evaluado rigurosamente", "Servicio cálido, humanizado y flexible", "Cuidadoras a domicilio según necesidad"] as beneficio, index}
+    {#each ["Atención 24/7 en todo Santiago Oriente y alrededores", "Personal rigurosamente seleccionado y calificado", "Trato humano, cálido y personalizado", "Planes flexibles según la necesidad del paciente"] as beneficio, index}
       <div
         class="flex items-start gap-3 bg-white rounded-xl p-4 shadow-md border border-blue-100"
         data-aos="fade-up"
@@ -399,13 +397,13 @@
     </h2>
     <div class="text-base md:text-lg text-gray-600 leading-relaxed space-y-4">
       <p>
-        En <span class="font-semibold text-green-600">SENDO</span> contamos con más de 18 años de experiencia en el cuidado del adulto mayor y tercera edad de forma segura y especializada a domicilio en comunas de Santiago-Oriente como <strong class="text-green-700">La Reina, Las Condes, Ñuñoa, Vitacura, La Dehesa, Lo Barnechea y también Chicureo</strong>.
+        En <span class="font-semibold text-green-600">SENDO</span> contamos con más de <strong class="text-green-700">18 años de experiencia</strong> brindando seguridad y bienestar en el hogar. Nos especializamos en la atención del adulto mayor en comunas como Las Condes, Vitacura, Lo Barnechea, La Reina, Ñuñoa y Chicureo.
       </p>
       <p>
-        Nuestro equipo combina compromiso humano y capacitación técnica para mejorar la calidad de vida de cada paciente, ayudándolos en sus quehaceres diarios y brindándoles compañía con un enfoque centrado en la cercanía y el respeto.
+        Sabemos que cada paciente es único. Por eso, nuestro equipo combina capacidad técnica con una profunda calidad humana para asistir en la rutina diaria, terapias y acompañamiento.
       </p>
       <p>
-        El servicio es realizado por personal de apoyo en el domicilio, cuya finalidad es estimular y asistir a los adultos mayores o enfermos en su rutina, aumentando su bienestar diario. A su vez, ofrecemos <strong>asistencia de enfermería a domicilio y hospitalización en casa</strong>. Realizamos la administración de múltiples tratamientos y servicios de enfermería o de cuidadoras para tercera edad según receta médica, a cargo de un equipo especializado con larga experiencia. Disponemos del equipo y la experiencia clínica necesaria.
+        <strong>¿Por qué nosotros?</strong> Porque entendemos que la salud no espera. Disponemos de equipos especializados y personal con larga trayectoria para realizar desde cuidados básicos hasta hospitalización domiciliaria compleja. Esa experiencia es nuestra garantía de tranquilidad para tu familia.
       </p>
     </div>
   </div>
@@ -464,7 +462,7 @@
     class="text-3xl md:text-5xl font-bold text-center text-green-600 mb-12"
     data-aos="fade-up"
   >
-    Mejorando la Calidad de Vida
+    Calidad de Vida en el Hogar
   </h2>
   <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
     {#each articulos as articulo (articulo.titulo)}
@@ -481,7 +479,7 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-2">
           {articulo.titulo}
         </h3>
-        <p class="text-md text-green-700">Haz clic para saber más.</p>
+        <p class="text-md text-green-700">Leer más sobre nuestra visión.</p>
       </div>
     {/each}
   </div>
@@ -510,7 +508,7 @@
       class="text-3xl md:text-5xl font-bold text-center mb-12 text-green-400"
       data-aos="fade-up"
     >
-      Testimonios
+      Lo que dicen las familias
     </h2>
     <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
       {#each testimonios as testimonio, index}
@@ -625,11 +623,11 @@
       id="contacto-title"
       class="text-3xl md:text-5xl font-bold text-green-600 mb-6"
     >
-      Contáctanos
+      Hablemos
     </h2>
     <p class="text-gray-600 mb-8 text-base md:text-lg">
-      ¿Tienes dudas o deseas agendar una visita? Escríbenos por WhatsApp, correo
-      electrónico o completa el formulario.
+      ¿Necesitas agendar una visita o resolver dudas? Estamos disponibles para ti.
+      Contáctanos por WhatsApp, correo o formulario.
     </p>
     <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
       <a
@@ -700,7 +698,7 @@
       />
       <textarea
         bind:value={mensaje}
-        placeholder="Mensaje"
+        placeholder="¿En qué podemos ayudarte?"
         required
         class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition resize-y"
         rows="4"
@@ -709,7 +707,7 @@
       <button
         type="submit"
         class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium"
-        >Enviar</button
+        >Enviar Mensaje</button
       >
     </form>
   </div>
@@ -717,12 +715,12 @@
 
 <section class="py-10 bg-white text-center">
   <h3 class="text-2xl font-bold text-green-600 mb-4">
-    Cobertura Especializada en Sector Oriente
+    Cobertura en Santiago Oriente
   </h3>
   <p class="text-gray-600 max-w-3xl mx-auto px-4">
-    Atención prioritaria y rápida en <strong
+    Llegamos rápidamente a <strong
       >Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia, Ñuñoa y Chicureo</strong
-    >. También cubrimos otras comunas de la Región Metropolitana.
+    >. Consultar por otras comunas.
   </p>
 </section>
 
@@ -732,13 +730,13 @@
   >
     <div class="flex flex-col items-center md:items-start">
       <h3 class="text-xl font-bold text-green-400 mb-2">SENDO</h3>
-      <p class="text-sm text-white">Servicios de Enfermería Domiciliaria</p>
+      <p class="text-sm text-white">Expertos en cuidados a domicilio</p>
       <p class="text-sm text-white mt-4">
         © {new Date().getFullYear()} SENDO. Todos los derechos reservados.
       </p>
     </div>
     <div>
-      <h4 class="text-xl font-bold mb-4 text-green-400">Explorar</h4>
+      <h4 class="text-xl font-bold mb-4 text-green-400">Navegación</h4>
       <ul class="space-y-2">
         <li>
           <a
@@ -750,14 +748,14 @@
           <a
             href="#servicios"
             class="text-white hover:text-green-400 transition text-md"
-            >Nuestros Servicios</a
+            >Servicios</a
           >
         </li>
         <li>
           <a
             href="#quienes"
             class="text-white hover:text-green-400 transition text-md"
-            >Sobre Nosotros</a
+            >Nosotros</a
           >
         </li>
         <li>
@@ -914,7 +912,7 @@
       target="_blank"
       rel="noopener noreferrer"
       class="hover:underline hover:text-green-300"
-    > 
+    >
       CC IT&Solutions
     </a>. Todos los derechos reservados.
   </div>
