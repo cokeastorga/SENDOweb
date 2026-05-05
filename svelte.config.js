@@ -8,7 +8,8 @@ const config = {
   kit: {
     adapter: vercel(),
     prerender: {
-      handleHttpError: 'warn' // evita que prerender falle por enlaces rotos
+      handleHttpError: 'warn', // evita que prerender falle por enlaces rotos
+      handleMissingId: 'warn' // permite links a #secciones del home desde otras páginas
     },
     alias: {
       $lib: 'src/lib',

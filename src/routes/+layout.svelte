@@ -1,69 +1,74 @@
 <script lang="ts">
 	import '../app.css';
   import { onMount } from 'svelte';
-	
-	
-	 
+  import { page } from '$app/stores';
+
   let menuAbierto = false;
 
-  const scrollA = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      menuAbierto = false;
+  const navigateTo = (id: string) => {
+    menuAbierto = false;
+    // If we're on the homepage, smooth scroll; otherwise navigate
+    if ($page.url.pathname === '/') {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.location.href = `/#${id}`;
     }
   };
 
-   const cerrarMenu = () => {
+  const cerrarMenu = () => {
     menuAbierto = false;
   };
 
   onMount(() => {
-  const handleClickOutside = (e: MouseEvent) => {
-    const menu = document.getElementById('menu-movil');
-    const btn = document.getElementById('btn-hamburguesa');
-    if (
-      menuAbierto &&
-      menu &&
-      !menu.contains(e.target as Node) &&
-      btn &&
-      !btn.contains(e.target as Node)
-    ) {
-      menuAbierto = false;
-    }
-  };
+    const handleClickOutside = (e: MouseEvent) => {
+      const menu = document.getElementById('menu-movil');
+      const btn = document.getElementById('btn-hamburguesa');
+      if (
+        menuAbierto &&
+        menu &&
+        !menu.contains(e.target as Node) &&
+        btn &&
+        !btn.contains(e.target as Node)
+      ) {
+        menuAbierto = false;
+      }
+    };
 
-  window.addEventListener('scroll', cerrarMenu);
-  window.addEventListener('click', handleClickOutside);
+    window.addEventListener('scroll', cerrarMenu);
+    window.addEventListener('click', handleClickOutside);
 
-  return () => {
-    window.removeEventListener('scroll', cerrarMenu);
-    window.removeEventListener('click', handleClickOutside);
-  };
-});
+    return () => {
+      window.removeEventListener('scroll', cerrarMenu);
+      window.removeEventListener('click', handleClickOutside);
+    };
+  });
 
 </script>
 
 
 <!-- Navbar -->
-<nav class="relative fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 sm:px-10 py-3 flex justify-between items-center transition duration-300">
+<nav class="relative fixed top-0 left-0 right-0 z-50 bg-white shadow-md px-4 sm:px-10 py-3 flex justify-between items-center transition duration-300" aria-label="Navegación principal">
 
   <!-- Logos -->
-  <a href="#hero" class="flex items-center justify-center">
-    <img src="/logo4.png" alt="Logo Escritorio" class="hidden sm:block h-26 w-auto" />
-    <img src="/logo3.jpg" alt="Logo Móvil" class="block sm:hidden h-14 w-auto" />
+  <a href="/" class="flex items-center justify-center">
+    <img src="/logo4.png" alt="SENDO - Servicios de Enfermería a Domicilio" class="hidden sm:block h-26 w-auto" />
+    <img src="/logo3.jpg" alt="SENDO Logo" class="block sm:hidden h-14 w-auto" />
   </a>
 
   <!-- Menú escritorio -->
   <div class="hidden sm:flex gap-6 text-sm font-medium text-green-700">
-    <button on:click={() => scrollA('hero')} class="text-xl font-medium text-green-600 hover:underline">Inicio</button>
-    <button on:click={() => scrollA('servicios')} class="text-xl font-medium text-green-600 hover:underline">Servicios</button>
-    <button on:click={() => scrollA('quienes')} class="text-xl font-medium text-green-600 hover:underline">Quiénes Somos</button>
-    <button on:click={() => scrollA('contacto')} class="text-xl font-medium text-green-600 hover:underline">Contacto</button>
+    <a href="/#hero" on:click|preventDefault={() => navigateTo('hero')} class="text-xl font-medium text-green-600 hover:underline">Inicio</a>
+    <a href="/#servicios" on:click|preventDefault={() => navigateTo('servicios')} class="text-xl font-medium text-green-600 hover:underline">Servicios</a>
+    <a href="/#quienes" on:click|preventDefault={() => navigateTo('quienes')} class="text-xl font-medium text-green-600 hover:underline">Quiénes Somos</a>
+    <a href="/#contacto" on:click|preventDefault={() => navigateTo('contacto')} class="text-xl font-medium text-green-600 hover:underline">Contacto</a>
+    <a href="/blog" class="text-xl font-medium text-green-600 hover:underline">Blog</a>
   </div>
 
   <!-- Botón hamburguesa móvil -->
-  <button id="btn-hamburguesa" class="sm:hidden text-3xl text-green-700" on:click={() => (menuAbierto = !menuAbierto)}>
+  <button id="btn-hamburguesa" class="sm:hidden text-3xl text-green-700" on:click={() => (menuAbierto = !menuAbierto)} aria-label="Abrir menú de navegación">
     {menuAbierto ? '✖' : '☰'}
   </button>
 </nav>
@@ -74,10 +79,11 @@
     id="menu-movil"
     class="absolute top-full left-0 w-full sm:hidden bg-white shadow-md px-4 py-4 flex flex-col gap-4 text-green-700 text-base font-medium z-40"
   >
-    <button on:click={() => scrollA('hero')}>Inicio</button>
-    <button on:click={() => scrollA('servicios')}>Servicios</button>
-    <button on:click={() => scrollA('quienes')}>Quiénes Somos</button>
-    <button on:click={() => scrollA('contacto')}>Contacto</button>
+    <a href="/#hero" on:click|preventDefault={() => navigateTo('hero')}>Inicio</a>
+    <a href="/#servicios" on:click|preventDefault={() => navigateTo('servicios')}>Servicios</a>
+    <a href="/#quienes" on:click|preventDefault={() => navigateTo('quienes')}>Quiénes Somos</a>
+    <a href="/#contacto" on:click|preventDefault={() => navigateTo('contacto')}>Contacto</a>
+    <a href="/blog" class="hover:underline">Blog</a>
   </div>
 {/if}
 
@@ -85,6 +91,7 @@
 <a
   href="https://wa.me/56998451117"
   target="_blank"
+  rel="noopener noreferrer"
   aria-label="Enviar mensaje por WhatsApp"
   class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition duration-300 flex items-center justify-center"
 >

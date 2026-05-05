@@ -132,7 +132,7 @@
     {
       icon: "👩‍⚕️",
       title: "Cuidadoras a Domicilio",
-      desc: "Atención integral, administración de medicamentos, compañía y cuidado 24/7 en Santiago.",
+      desc: "Atención integral, administración de medicamentos, compañía y cuidado 24/7 en todo Santiago.",
       videoBase: "/temp",
       contenido: `
         <p>El cuidado en casa requiere más que buenas intenciones; exige conocimientos técnicos y dedicación. Nuestro servicio incluye:</p>
@@ -149,7 +149,7 @@
     {
       icon: "🧪",
       title: "Procedimientos de Enfermería",
-      desc: "Instalación de sondas, manejo de ostomías y tratamientos endovenosos por expertos.",
+      desc: "Instalación de sondas, manejo de ostomías y tratamientos endovenosos por expertos en Santiago.",
       videoBase: "/suero",
       contenido: `
         <p>Ciertos tratamientos médicos no pueden dejarse al azar. Realizamos procedimientos complejos en la comodidad del hogar:</p>
@@ -160,6 +160,89 @@
         </ul>
         <p class="mt-4 font-semibold text-green-800">Evita traslados innecesarios y riesgos de infección intrahospitalaria. Nuestro equipo de enfermería lleva la clínica a tu casa con la seguridad y esterilidad que el paciente requiere.</p>
       `,
+    },
+    {
+      icon: "🕐",
+      title: "Auxiliares de Enfermería — Turnos 12 y 24 Horas",
+      desc: "Auxiliares capacitadas para turnos de 12 o 24 horas, garantizando atención continua del adulto mayor.",
+      videoBase: "/cuidado",
+      contenido: `
+        <p>Cuando el paciente requiere vigilancia y asistencia permanente, nuestras auxiliares de enfermería cubren turnos completos:</p>
+        <ul class="list-disc pl-5 space-y-1 mt-2">
+          <li>Turnos diurnos o nocturnos de 12 horas.</li>
+          <li>Cobertura continua de 24 horas con rotación profesional.</li>
+          <li>Apoyo en higiene, alimentación, movilización y medicamentos.</li>
+          <li>Registro y reporte diario del estado del paciente.</li>
+          <li>Coordinación directa con la familia y el médico tratante.</li>
+        </ul>
+        <p class="mt-4 font-semibold text-green-800">Con más de 18 años formando y seleccionando personal, SENDO garantiza auxiliares confiables, responsables y con vocación de servicio para el cuidado de tu ser querido.</p>
+      `,
+    },
+    {
+      icon: "💻",
+      title: "Consultas Médicas Telemáticas",
+      desc: "Atención médica online desde la comodidad de tu hogar. Médico disponible para consultas virtuales en Santiago.",
+      videoBase: "/abuela_computador",
+      contenido: `
+        <p>La telemedicina es una herramienta poderosa para el adulto mayor que no puede desplazarse fácilmente. Nuestro servicio incluye:</p>
+        <ul class="list-disc pl-5 space-y-1 mt-2">
+          <li>Consultas médicas por videollamada con médico certificado.</li>
+          <li>Evaluación de síntomas, seguimiento de tratamientos y ajuste de medicamentos.</li>
+          <li>Emisión de recetas electrónicas y órdenes de exámenes.</li>
+          <li>Coordinación con cuidadoras en terreno para una atención integral.</li>
+          <li>Disponibilidad flexible, sin necesidad de traslados.</li>
+        </ul>
+        <p class="mt-4 font-semibold text-green-800">Acercamos la medicina a tu hogar. Nuestro médico trabaja en conjunto con el equipo de cuidadoras SENDO para ofrecer una atención completa, oportuna y sin salir de casa.</p>
+      `,
+    },
+    {
+      icon: "🧠",
+      title: "Acompañamiento y Estimulación Cognitiva",
+      desc: "Actividades terapéuticas para prevenir el deterioro cognitivo y combatir la soledad en adultos mayores.",
+      videoBase: "/soledad",
+      contenido: `
+        <p>El aislamiento y la falta de estímulos aceleran el deterioro mental en la tercera edad. Nuestro programa incluye:</p>
+        <ul class="list-disc pl-5 space-y-1 mt-2">
+          <li>Ejercicios de memoria, atención y lenguaje adaptados a cada paciente.</li>
+          <li>Actividades recreativas y de socialización.</li>
+          <li>Acompañamiento emocional y contención psicológica.</li>
+          <li>Estimulación sensorial y motora.</li>
+          <li>Reportes de evolución para la familia.</li>
+        </ul>
+        <p class="mt-4 font-semibold text-green-800">En SENDO entendemos que cuidar no es solo asistir físicamente. Nuestras cuidadoras están capacitadas para mantener activa la mente y el espíritu de tu familiar, mejorando su calidad de vida día a día.</p>
+      `,
+    },
+  ];
+
+  // PREGUNTAS FRECUENTES (para sección FAQ + schema FAQPage)
+  const faqs = [
+    {
+      pregunta: "¿Qué comunas de Santiago cubren?",
+      respuesta: "Cubrimos todo Santiago: Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia, Ñuñoa, Chicureo, Santiago Centro, Maipú, La Florida, Puente Alto, Quilicura, Peñalolén, Macul, San Miguel, y más. Consulta por tu comuna.",
+    },
+    {
+      pregunta: "¿Tienen servicio 24/7?",
+      respuesta: "Sí. Ofrecemos turnos de 12 y 24 horas, los 7 días de la semana, incluyendo feriados. Nuestro equipo está disponible para emergencias y necesidades de cuidado continuo.",
+    },
+    {
+      pregunta: "¿Ofrecen consultas médicas online?",
+      respuesta: "Sí. Contamos con un médico disponible para consultas telemáticas por videollamada. Puede evaluar síntomas, ajustar tratamientos y emitir recetas electrónicas sin que el paciente deba trasladarse.",
+    },
+    {
+      pregunta: "¿Cómo seleccionan a sus cuidadoras?",
+      respuesta: "Todas nuestras cuidadoras y auxiliares de enfermería pasan por un riguroso proceso de selección que incluye verificación de antecedentes, entrevistas técnicas, evaluación de competencias y referencias laborales. Solo trabajamos con personal de confianza.",
+    },
+    {
+      pregunta: "¿Cuánto cuesta el servicio de cuidadoras a domicilio?",
+      respuesta: "Los costos varían según el tipo de servicio, cantidad de horas y necesidades del paciente. Ofrecemos planes personalizados. Contáctanos por WhatsApp o formulario para una cotización sin compromiso.",
+    },
+    {
+      pregunta: "¿Atienden pacientes postoperatorios?",
+      respuesta: "Sí. Tenemos amplia experiencia en cuidados postoperatorios a domicilio, incluyendo manejo de heridas, administración de medicamentos, control de signos vitales y rehabilitación temprana.",
+    },
+    {
+      pregunta: "¿Cuántos años de experiencia tienen?",
+      respuesta: "SENDO cuenta con más de 18 años de experiencia brindando servicios de enfermería y cuidadoras a domicilio en Santiago, desde 2007.",
     },
   ];
 
@@ -193,60 +276,60 @@
 </script>
 
 <svelte:head>
-  <title>SENDO - Enfermería y Cuidadoras a Domicilio en Santiago Oriente</title>
+  <title>SENDO | Cuidadoras y Enfermería a Domicilio en Santiago - Turnos 24/7</title>
   
   <meta
     name="description"
-    content="Servicios de enfermería y cuidadoras a domicilio en Las Condes, Vitacura, Lo Barnechea y todo Santiago. Más de 18 años de experiencia en cuidado de adulto mayor."
+    content="Cuidadoras y enfermería a domicilio en todo Santiago. Auxiliares con turnos de 12 y 24 horas, consultas médicas telemáticas, procedimientos de enfermería y acompañamiento al adulto mayor. Más de 18 años de experiencia. Cotiza gratis."
   />
   <meta
     name="keywords"
-    content="enfermeria a domicilio, cuidadoras a domicilio, santiago, adulto mayor, postoperatorio, sondas, tratamientos endovenosos, enfermeras santiago, SENDO, cuidados tercera edad, las condes, vitacura, lo barnechea, ñuñoa"
+    content="cuidadoras a domicilio santiago, enfermeria a domicilio santiago, auxiliar de enfermeria a domicilio, cuidado adulto mayor santiago, enfermeras a domicilio las condes, cuidadoras vitacura, enfermeria lo barnechea, telemedicina santiago, consulta medica online chile, turnos 12 horas cuidadora, turnos 24 horas enfermeria, cuidados postoperatorios domicilio, SENDO enfermeria, tercera edad santiago, cuidadoras ñuñoa, enfermeria providencia, cuidadoras la florida, auxiliar enfermeria quilicura, cuidadoras maipu, cuidado domiciliario santiago"
   />
-  <meta name="robots" content="index, follow" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="UTF-8" />
-  <meta name="author" content="SENDO" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content="SENDO - Servicios de Enfermería a Domicilio" />
   <meta name="geo.region" content="CL-RM" />
   <meta name="geo.placename" content="Santiago, Chile" />
   <meta name="geo.position" content="-33.4489;-70.6693" />
   <meta name="ICBM" content="-33.4489, -70.6693" />
-  <link rel="canonical" href="https://www.enfermeriasendo.cl" />
+  <link rel="canonical" href="https://www.enfermeriasendo.cl/" />
+  
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="SENDO Enfermería" />
   <meta
     property="og:title"
-    content="SENDO - Experiencia en Cuidadoras a Domicilio"
+    content="SENDO | Cuidadoras y Enfermería a Domicilio en Santiago"
   />
   <meta
     property="og:description"
-    content="Atención profesional 24/7 en el hogar. Expertos en adulto mayor y procedimientos de enfermería en sector oriente y Santiago."
+    content="Más de 18 años cuidando al adulto mayor en Santiago. Cuidadoras, auxiliares de enfermería, telemedicina y atención 24/7. Cotiza sin compromiso."
   />
   <meta
     property="og:image"
     content="https://www.enfermeriasendo.cl/logo3.jpg"
   />
-  <meta property="og:url" content="https://www.enfermeriasendo.cl" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SENDO - Servicios de Enfermería a Domicilio en Santiago" />
+  <meta property="og:url" content="https://www.enfermeriasendo.cl/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_CL" />
+  
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta
     name="twitter:title"
-    content="SENDO - Cuidadoras y Enfermería en Santiago"
+    content="SENDO | Cuidadoras y Enfermería a Domicilio en Santiago"
   />
   <meta
     name="twitter:description"
-    content="Más de 18 años cuidando a adultos mayores en Santiago. Contacto inmediato."
+    content="Más de 18 años cuidando al adulto mayor en Santiago. Cuidadoras 24/7, telemedicina y enfermería profesional. Contacto inmediato."
   />
   <meta
     name="twitter:image"
-    content="https://www.enfermeriasendo.cl/og-image.jpg"
+    content="https://www.enfermeriasendo.cl/logo3.jpg"
   />
 
-  <link
-    rel="preload"
-    href="/abuela_computador.mp4"
-    as="video"
-    type="video/mp4"
-  />
   <link rel="preload" href="/logo3.jpg" as="image" />
 
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
@@ -258,55 +341,222 @@
     rel="stylesheet"
   />
 
+  <!-- Schema: LocalBusiness / MedicalBusiness -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
-      "name": "SENDO - Servicios de Enfermería a domicilio",
+      "name": "SENDO - Servicios de Enfermería a Domicilio",
+      "alternateName": "SENDO Enfermería",
       "image": "https://www.enfermeriasendo.cl/logo4.png",
+      "logo": "https://www.enfermeriasendo.cl/logo4.png",
       "url": "https://www.enfermeriasendo.cl",
       "telephone": "+56998451117",
       "email": "sendo.eirl@gmail.com",
+      "foundingDate": "2007",
+      "sameAs": [
+        "https://www.facebook.com/pages/Sendo/107147515985494/"
+      ],
       "areaServed": [
         { "@type": "City", "name": "Las Condes" },
         { "@type": "City", "name": "Vitacura" },
         { "@type": "City", "name": "Lo Barnechea" },
         { "@type": "City", "name": "La Reina" },
         { "@type": "City", "name": "Ñuñoa" },
+        { "@type": "City", "name": "Providencia" },
         { "@type": "City", "name": "Chicureo" },
-        { "@type": "City", "name": "Santiago" }
+        { "@type": "City", "name": "Santiago" },
+        { "@type": "City", "name": "Maipú" },
+        { "@type": "City", "name": "La Florida" },
+        { "@type": "City", "name": "Puente Alto" },
+        { "@type": "City", "name": "Quilicura" },
+        { "@type": "City", "name": "Peñalolén" },
+        { "@type": "City", "name": "Macul" },
+        { "@type": "City", "name": "San Miguel" },
+        { "@type": "City", "name": "Huechuraba" },
+        { "@type": "City", "name": "Recoleta" },
+        { "@type": "City", "name": "Independencia" },
+        { "@type": "City", "name": "San Bernardo" }
       ],
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Santiago",
+        "streetAddress": "Pasaje Teno #262",
+        "addressLocality": "Quilicura",
         "addressRegion": "Región Metropolitana",
         "addressCountry": "CL"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": -33.4489,
-        "longitude": -70.6693
+        "latitude": -33.3628,
+        "longitude": -70.7344
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
         ],
         "opens": "00:00",
         "closes": "23:59"
       },
       "priceRange": "$$",
-      "description": "Servicios de enfermería y cuidadoras a domicilio en Santiago. Atención 24/7 con más de 18 años de experiencia."
+      "description": "Servicios de enfermería, cuidadoras y auxiliares a domicilio en todo Santiago. Turnos de 12 y 24 horas, consultas médicas telemáticas, procedimientos de enfermería y acompañamiento al adulto mayor. Más de 18 años de experiencia.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Enfermería a Domicilio",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cuidadoras a Domicilio",
+              "description": "Atención integral, administración de medicamentos, compañía y cuidado 24/7 en todo Santiago."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Procedimientos de Enfermería a Domicilio",
+              "description": "Instalación de sondas, manejo de ostomías y tratamientos endovenosos por profesionales."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Auxiliares de Enfermería - Turnos 12 y 24 Horas",
+              "description": "Auxiliares capacitadas para turnos de 12 o 24 horas para el cuidado continuo del adulto mayor."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Consultas Médicas Telemáticas",
+              "description": "Atención médica online por videollamada con médico certificado. Recetas electrónicas y seguimiento."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Acompañamiento y Estimulación Cognitiva",
+              "description": "Actividades terapéuticas para prevenir el deterioro cognitivo y combatir la soledad en adultos mayores."
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Schema: FAQPage (para featured snippets en Google) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué comunas de Santiago cubren?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cubrimos todo Santiago: Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia, Ñuñoa, Chicureo, Santiago Centro, Maipú, La Florida, Puente Alto, Quilicura, Peñalolén, Macul, San Miguel, y más. Consulta por tu comuna."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tienen servicio 24/7?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Ofrecemos turnos de 12 y 24 horas, los 7 días de la semana, incluyendo feriados. Nuestro equipo está disponible para emergencias y necesidades de cuidado continuo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Ofrecen consultas médicas online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Contamos con un médico disponible para consultas telemáticas por videollamada. Puede evaluar síntomas, ajustar tratamientos y emitir recetas electrónicas sin que el paciente deba trasladarse."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo seleccionan a sus cuidadoras?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todas nuestras cuidadoras y auxiliares de enfermería pasan por un riguroso proceso de selección que incluye verificación de antecedentes, entrevistas técnicas, evaluación de competencias y referencias laborales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta el servicio de cuidadoras a domicilio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los costos varían según el tipo de servicio, cantidad de horas y necesidades del paciente. Ofrecemos planes personalizados. Contáctanos por WhatsApp o formulario para una cotización sin compromiso."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Atienden pacientes postoperatorios?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Tenemos amplia experiencia en cuidados postoperatorios a domicilio, incluyendo manejo de heridas, administración de medicamentos, control de signos vitales y rehabilitación temprana."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántos años de experiencia tienen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SENDO cuenta con más de 18 años de experiencia brindando servicios de enfermería y cuidadoras a domicilio en Santiago, desde 2007."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.enfermeriasendo.cl/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://www.enfermeriasendo.cl/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Quiénes Somos",
+          "item": "https://www.enfermeriasendo.cl/#quienes"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Contacto",
+          "item": "https://www.enfermeriasendo.cl/#contacto"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Blog",
+          "item": "https://www.enfermeriasendo.cl/blog"
+        }
+      ]
     }
   </script>
 </svelte:head>
 
+<main>
 <section
   id="hero"
   class="relative min-h-screen flex items-center justify-center text-center px-4 py-16 overflow-hidden"
@@ -318,7 +568,7 @@
     playsinline
     class="absolute top-0 left-0 w-full h-full object-cover z-0"
     aria-hidden="true"
-    preload="auto"
+    preload="metadata"
   >
     <source src="/abuela_computador.webm" type="video/webm" />
     <source src="/abuela_computador.mp4" type="video/mp4" />
@@ -377,7 +627,7 @@
     ¿Por qué elegir SENDO?
   </h2>
   <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-    {#each ["Atención 24/7 en todo Santiago Oriente y alrededores", "Personal rigurosamente seleccionado y calificado", "Trato humano, cálido y personalizado", "Planes flexibles según la necesidad del paciente"] as beneficio, index}
+    {#each ["Atención 24/7 en todo Santiago — turnos de 12 y 24 horas", "Personal rigurosamente seleccionado y calificado", "Consultas médicas telemáticas con médico certificado", "Trato humano, cálido y personalizado", "Planes flexibles según la necesidad del paciente", "Más de 18 años de experiencia desde 2007"] as beneficio, index}
       <div
         class="flex items-start gap-3 bg-white rounded-xl p-4 shadow-md border border-blue-100"
         data-aos="fade-up"
@@ -397,13 +647,13 @@
     </h2>
     <div class="text-base md:text-lg text-gray-600 leading-relaxed space-y-4">
       <p>
-        En <span class="font-semibold text-green-600">SENDO</span> contamos con más de <strong class="text-green-700">18 años de experiencia</strong> brindando seguridad y bienestar en el hogar. Nos especializamos en la atención del adulto mayor en comunas como Las Condes, Vitacura, Lo Barnechea, La Reina, Ñuñoa y Chicureo.
+        En <span class="font-semibold text-green-600">SENDO</span> contamos con más de <strong class="text-green-700">18 años de experiencia</strong> brindando seguridad y bienestar en el hogar. Desde 2007, nos especializamos en la <strong>atención del adulto mayor a domicilio en todo Santiago</strong>: Las Condes, Vitacura, Lo Barnechea, La Reina, Ñuñoa, Providencia, Chicureo, Maipú, La Florida, Puente Alto, Quilicura y más.
       </p>
       <p>
-        Sabemos que cada paciente es único. Por eso, nuestro equipo combina capacidad técnica con una profunda calidad humana para asistir en la rutina diaria, terapias y acompañamiento.
+        Sabemos que cada paciente es único. Por eso, nuestro equipo combina capacidad técnica con una profunda calidad humana para asistir en la rutina diaria, terapias, acompañamiento y <strong>consultas médicas telemáticas</strong> sin necesidad de traslados.
       </p>
       <p>
-        <strong>¿Por qué nosotros?</strong> Porque entendemos que la salud no espera. Disponemos de equipos especializados y personal con larga trayectoria para realizar desde cuidados básicos hasta hospitalización domiciliaria compleja. Esa experiencia es nuestra garantía de tranquilidad para tu familia.
+        <strong>¿Por qué nosotros?</strong> Porque entendemos que la salud no espera. Disponemos de <strong>cuidadoras y auxiliares de enfermería</strong> para turnos de 12 y 24 horas, equipos especializados y un médico para atención online. Esa experiencia y dedicación es nuestra garantía de tranquilidad para tu familia.
       </p>
     </div>
   </div>
@@ -435,7 +685,7 @@
     >
       Nuestros Servicios
     </h2>
-    <div class="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       {#each servicios as servicio, index}
         <div
           class="bg-white/90 text-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 border border-gray-100 backdrop-blur-md cursor-pointer"
@@ -482,6 +732,47 @@
         <p class="text-md text-green-700">Leer más sobre nuestra visión.</p>
       </div>
     {/each}
+  </div>
+</section>
+
+<!-- SECCIÓN FAQ -->
+<section id="faq" class="py-20 bg-white px-4" aria-labelledby="faq-title">
+  <div class="max-w-4xl mx-auto">
+    <h2
+      id="faq-title"
+      class="text-3xl md:text-5xl font-bold text-center text-green-600 mb-12"
+      data-aos="fade-up"
+    >
+      Preguntas Frecuentes
+    </h2>
+    <div class="space-y-4">
+      {#each faqs as faq, index}
+        <details
+          class="group bg-gray-50 rounded-xl border border-gray-200 overflow-hidden"
+          data-aos="fade-up"
+          data-aos-delay={index * 50}
+        >
+          <summary
+            class="flex items-center justify-between cursor-pointer px-6 py-4 text-gray-900 font-semibold text-base md:text-lg hover:bg-gray-100 transition"
+          >
+            <span>{faq.pregunta}</span>
+            <svg
+              class="w-5 h-5 text-green-600 transition-transform group-open:rotate-180 shrink-0 ml-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-gray-600 text-base leading-relaxed">
+            <p>{faq.respuesta}</p>
+          </div>
+        </details>
+      {/each}
+    </div>
   </div>
 </section>
 
@@ -633,6 +924,7 @@
       <a
         href="https://wa.me/56998451117"
         target="_blank"
+        rel="noopener noreferrer"
         class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 flex items-center gap-2 transition"
         aria-label="Contactar por WhatsApp"
       >
@@ -713,15 +1005,21 @@
   </div>
 </section>
 
-<section class="py-10 bg-white text-center">
-  <h3 class="text-2xl font-bold text-green-600 mb-4">
-    Cobertura en Santiago Oriente
+<section id="cobertura" class="py-16 bg-green-50 text-center px-4" aria-labelledby="cobertura-title">
+  <h3 id="cobertura-title" class="text-2xl md:text-4xl font-bold text-green-600 mb-4">
+    Cobertura en Todo Santiago
   </h3>
-  <p class="text-gray-600 max-w-3xl mx-auto px-4">
-    Llegamos rápidamente a <strong
-      >Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia, Ñuñoa y Chicureo</strong
-    >. Consultar por otras comunas.
+  <p class="text-gray-600 max-w-3xl mx-auto mb-8 text-base md:text-lg">
+    Nuestras cuidadoras y auxiliares de enfermería llegan a todas las comunas de Santiago. Atención a domicilio 24/7 donde nos necesites.
   </p>
+  <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+    {#each ["Las Condes", "Vitacura", "Lo Barnechea", "La Reina", "Providencia", "Ñuñoa", "Chicureo", "Santiago Centro", "Maipú", "La Florida", "Puente Alto", "Quilicura", "Peñalolén", "Macul", "San Miguel", "Huechuraba", "Recoleta", "Independencia", "San Bernardo", "Colina", "Peñaflor", "Padre Hurtado"] as comuna}
+      <span class="inline-block bg-white text-green-700 text-sm font-medium px-3 py-1.5 rounded-full border border-green-200 shadow-sm">
+        {comuna}
+      </span>
+    {/each}
+  </div>
+  <p class="text-gray-500 text-sm mt-4">¿No ves tu comuna? <a href="#contacto" class="text-green-600 font-semibold hover:underline">Consúltanos</a>, probablemente también llegamos.</p>
 </section>
 
 <footer class="bg-green-900 text-white py-12 px-4" aria-label="Pie de página">
@@ -739,31 +1037,22 @@
       <h4 class="text-xl font-bold mb-4 text-green-400">Navegación</h4>
       <ul class="space-y-2">
         <li>
-          <a
-            href="#hero"
-            class="text-white hover:text-green-400 transition text-md">Inicio</a
-          >
+          <a href="#hero" class="text-white hover:text-green-400 transition text-md">Inicio</a>
         </li>
         <li>
-          <a
-            href="#servicios"
-            class="text-white hover:text-green-400 transition text-md"
-            >Servicios</a
-          >
+          <a href="#servicios" class="text-white hover:text-green-400 transition text-md">Servicios</a>
         </li>
         <li>
-          <a
-            href="#quienes"
-            class="text-white hover:text-green-400 transition text-md"
-            >Nosotros</a
-          >
+          <a href="#quienes" class="text-white hover:text-green-400 transition text-md">Nosotros</a>
         </li>
         <li>
-          <a
-            href="#contacto"
-            class="text-white hover:text-green-400 transition text-md"
-            >Contacto</a
-          >
+          <a href="#faq" class="text-white hover:text-green-400 transition text-md">Preguntas Frecuentes</a>
+        </li>
+        <li>
+          <a href="#contacto" class="text-white hover:text-green-400 transition text-md">Contacto</a>
+        </li>
+        <li>
+          <a href="/blog" class="text-white hover:text-green-400 transition text-md">Blog</a>
         </li>
       </ul>
     </div>
@@ -793,9 +1082,10 @@
             />
           </svg>
           <a
-            href="https://maps.app.goo.gl/"
+            href="https://maps.app.goo.gl/Quilicura"
             target="_blank"
-            class="hover:text-green-400 transition text-md">Santiago, Chile</a
+            rel="noopener noreferrer"
+            class="hover:text-green-400 transition text-md">Psje. Teno #262, Quilicura</a
           >
         </li>
         <li class="flex items-center justify-center md:justify-start gap-2">
@@ -860,6 +1150,7 @@
           <a
             href="https://wa.me/56998451117"
             target="_blank"
+            rel="noopener noreferrer"
             class="hover:text-green-400 transition text-md">WhatsApp</a
           >
         </li>
@@ -868,6 +1159,7 @@
         <a
           href="https://www.facebook.com/pages/Sendo/107147515985494/"
           target="_blank"
+          rel="noopener noreferrer"
           class="text-gray-400 hover:text-green-400 transition"
           aria-label="Facebook de SENDO"
         >
@@ -882,23 +1174,7 @@
             />
           </svg>
         </a>
-        <a
-          href="https://instagram.com/"
-          target="_blank"
-          class="text-gray-400 hover:text-green-400 transition"
-          aria-label="Instagram de SENDO"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            class="w-6 h-6"
-          >
-            <path
-              d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.326 3.608 1.301.975.975 1.239 2.242 1.301 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.239-3.608 1.301-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.239-2.242-1.301-3.608-.058-1.28-.072-1.688-.072-4.947s.014-3.667.072-4.947c.073-1.629.468-3.027 1.56-4.119 1.092-1.092 2.49-1.487 4.119-1.56 1.28-.058 1.688-.072 4.947-.072s3.667-.014 4.947-.072c1.629-.073 3.027-.468 4.119-1.56 1.092-1.092 1.487-2.49 1.56-4.119.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.073-1.629-.468-3.027-1.56-4.119-1.092-1.092-2.49-1.487-4.119-1.56-1.28-.058-1.688-.072-4.947-.072zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.162 12 18.162s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.324c-2.299 0-4.162-1.863-4.162-4.162S9.701 7.838 12 7.838s4.162 1.863 4.162 4.162S14.299 16.162 12 16.162zm4.406-10.406c0 .796-.645 1.441-1.441 1.441s-1.441-.645-1.441-1.441.645-1.441 1.441-1.441 1.441.645 1.441 1.441z"
-            />
-          </svg>
-        </a>
+
       </div>
     </div>
   </div>
@@ -917,6 +1193,7 @@
     </a>. Todos los derechos reservados.
   </div>
 </footer>
+</main>
 
 {#if modalData}
   <ModalInfo {modalData} on:close={cerrarModal} />
