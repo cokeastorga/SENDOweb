@@ -187,7 +187,8 @@ export const blogPosts: BlogPost[] = [
         <p class="text-green-800 font-semibold text-lg">¿Necesitas enfermería postoperatoria en Santiago?</p>
         <p class="text-green-700 mt-2">En SENDO tenemos amplia experiencia en cuidados post cirugía a domicilio. <a href="/#contacto" class="underline font-bold">Cotiza sin compromiso</a>.</p>
       </div>
-    `,
+    `
+  },
   {
     slug: "cuanto-cuesta-cuidadora-domicilio-santiago-2026",
     title: "Cuánto Cuesta una Cuidadora a Domicilio en Santiago (2026)",
